@@ -1,6 +1,6 @@
-Feature: Read a Collection
+Feature: Read a Collection - Repository
 
-Scenario Outline: Can InsertManyAsync
+Scenario Outline: Can Find
     Given a GenericRepository of PersonEntity
     And a collection of <number> PersonEntities exist(s)
     When calling the Find method of the repository collection

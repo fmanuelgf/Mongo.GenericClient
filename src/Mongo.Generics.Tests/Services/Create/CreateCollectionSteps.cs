@@ -1,12 +1,11 @@
-namespace Mongo.Generics.Tests.Repositories.Create
+namespace Mongo.Generics.Tests.Services.Create
 {
     using Mongo.Generics.Tests.Base;
-    using Mongo.Generics.Tests.SetUp;
     using TechTalk.SpecFlow;
 
     [Binding]
-    [Scope(Feature = "Create a Collection - Repository")]
-    public class CreateCollectionSteps 
+    [Scope(Feature = "Create a Collection - Service")]
+    public class CreateCollectionSteps
     {
         private readonly CreateCollectionScenario scenario;
 
@@ -16,7 +15,7 @@ namespace Mongo.Generics.Tests.Repositories.Create
             this.scenario = scenario;
         }
 
-        [Given("a GenericRepository of PersonEntity")]
+        [Given("a WriteService of PersonEntity")]
         public void GivenAGenericRepositoryOfPersonEntity()
         {
             // The repository already exists.
@@ -31,7 +30,7 @@ namespace Mongo.Generics.Tests.Repositories.Create
             this.scenario.CreatePersonEntities(number);
         }
 
-        [When("calling the (.*) method of the repository collection")]
+        [When("calling the (.*) method of the WriteService")]
         public async Task WhenRepositoryMethodIsCalledAsync(string method)
         {
             await this.scenario.RunMethodAsync(method);

@@ -39,9 +39,9 @@ namespace Mongo.Generics.Services
                 pageNum = 1;
             }
 
-            if (pageSize < 5)
+            if (pageSize < 1)
             {
-                pageSize = 5;
+                pageSize = 1;
             }
 
             var filter = Builders<TEntity>.Filter.Eq(x => x.DeletedAt, null);

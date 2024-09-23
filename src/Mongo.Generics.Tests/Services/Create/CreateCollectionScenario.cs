@@ -1,4 +1,4 @@
-namespace Mongo.Generics.Tests.Repositories.Create
+namespace Mongo.Generics.Tests.Services.Create
 {
     using Mongo.Generics.Tests.Base;
     using Mongo.Generics.Tests.SetUp;
@@ -23,12 +23,8 @@ namespace Mongo.Generics.Tests.Repositories.Create
         {
             switch (method)
             {
-                case "InsertOneAsync":
-                    await this.Repository.Collection.InsertOneAsync(this.personEntities.First());
-                    break;
-
-                case "InsertManyAsync":
-                    await this.Repository.Collection.InsertManyAsync(this.personEntities);
+                case "CreateAsync":
+                    await this.WriteService.CreateAsync(this.personEntities.First());
                     break;
 
                 default:

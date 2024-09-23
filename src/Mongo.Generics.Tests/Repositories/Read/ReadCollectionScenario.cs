@@ -1,28 +1,23 @@
 namespace Mongo.Generics.Tests.Repositories.Read
 {
-    using Mongo.Generics.Core.Repositories;
-    using Mongo.Generics.Repositories;
     using Mongo.Generics.Tests.Base;
     using Mongo.Generics.Tests.SetUp;
     using MongoDB.Driver;
 
-    public class ReadCollectionScenario : ScenarioBase
+    public class ReadCollectionScenario : ScenarioBase<PersonEntity>
     {
-        private readonly IGenericRepository<PersonEntity> personsRepository;
         private List<PersonEntity> personEntities;
 
         public ReadCollectionScenario()
             : base()
         {
-            TestConfig.Configure();
-            this.personsRepository = new GenericRepository<PersonEntity>();
             this.personEntities = new List<PersonEntity>();
         }
 
         public async Task CreatePersonCollectionAsync(int number)
         {
             var entities = DataFactory.BuildPersonEntities(number);
-            await this.personsRepository.Collection.InsertManyAsync(entities);
+            await this.Repository.Collection.InsertManyAsync(entities);
         }
 
         public async Task RunMethodAsync(string method)
@@ -30,7 +25,7 @@ namespace Mongo.Generics.Tests.Repositories.Read
             switch (method)
             {
                 case "Find":
-                    this.personEntities = await this.personsRepository.Collection
+                    this.personEntities = await this.Repository.Collection
                         .Find(Builders<PersonEntity>.Filter.Empty)
                         .ToListAsync();
                     break;
@@ -42,10 +37,7 @@ namespace Mongo.Generics.Tests.Repositories.Read
 
         public void CheckCollectionCount(int expectedCount)
         {
-            Assert.That(
-                this.personsRepository.Collection.CountDocuments(Builders<PersonEntity>.Filter.Empty),
-                Is.EqualTo(expectedCount)
-            );
+            Assert.That(this.personEntities.Count, Is.EqualTo(expectedCount));
         }
     }
 }

@@ -1,4 +1,4 @@
-Feature: Create a Collection
+Feature: Create a Collection - Repository
 
 Scenario: Can InsertOneAsync
     Given a GenericRepository of PersonEntity

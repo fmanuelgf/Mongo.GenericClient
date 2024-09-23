@@ -1,11 +1,10 @@
 namespace Mongo.Generics.Tests.Repositories.Read
 {
-    using Mongo.Generics.Tests.Base;
     using TechTalk.SpecFlow;
 
     [Binding]
-    [Scope(Feature = "Read a Collection")]
-    public class ReadCollectionSteps : ScenarioBase
+    [Scope(Feature = "Read a Collection - Repository")]
+    public class ReadCollectionSteps
     {
         private readonly ReadCollectionScenario scenario;
 
