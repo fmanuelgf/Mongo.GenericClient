@@ -5,13 +5,13 @@ namespace Mongo.Generics.Core.Entities
 
     public abstract class AuditableEntity
     {
-        [BsonElement("crtdat")]
+        [BsonElement("createdAt")]
         public DateTime CreatedAt { get; set; }
 
-        [BsonElement("updtat")]
-        public DateTime? UpdateddAt { get; set; }
+        [BsonElement("updatedAt")]
+        public DateTime? UpdatedAt { get; set; }
 
-        [BsonElement("delat")]
+        [BsonElement("deletedAt")]
         public DateTime? DeletedAt { get; set; }
     }
 }

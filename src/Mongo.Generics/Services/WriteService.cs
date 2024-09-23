@@ -1,4 +1,4 @@
-namespace Mongo.Generics.Logic.Services
+namespace Mongo.Generics.Services
 {
     using System.Threading.Tasks;
     using Mongo.Generics.Core.Entities;
@@ -36,7 +36,7 @@ namespace Mongo.Generics.Logic.Services
                 .Filter
                 .Eq(x => x.Id, entity.Id);
 
-            entity.UpdateddAt = DateTime.Now;
+            entity.UpdatedAt = DateTime.Now;
 
             var result = await this.repository
                 .Collection

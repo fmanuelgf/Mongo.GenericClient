@@ -1,4 +1,4 @@
-namespace Mongo.Generics.Logic.Services
+namespace Mongo.Generics.Services
 {
     using System.Collections.Generic;
     using System.Linq;
