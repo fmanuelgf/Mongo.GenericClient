@@ -108,7 +108,7 @@ await this.repository.Collection.InsertOneAsync(entity);
 
 using the service
 ```C#
-await this.WriteService.CreateAsync(entity);
+await this.writeService.CreateAsync(entity);
 ```
 
 <hr>
