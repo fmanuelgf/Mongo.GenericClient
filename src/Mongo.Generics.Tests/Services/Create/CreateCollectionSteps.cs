@@ -1,6 +1,5 @@
 namespace Mongo.Generics.Tests.Services.Create
 {
-    using Mongo.Generics.Tests.Base;
     using TechTalk.SpecFlow;
 
     [Binding]
@@ -18,7 +17,7 @@ namespace Mongo.Generics.Tests.Services.Create
         [Given("a WriteService of PersonEntity")]
         public void GivenAGenericRepositoryOfPersonEntity()
         {
-            // The repository already exists.
+            // The service already exists.
             // We just make sure that the dabase is empty.
             this.scenario.ClearDatabase();
         }
@@ -31,12 +30,12 @@ namespace Mongo.Generics.Tests.Services.Create
         }
 
         [When("calling the (.*) method of the WriteService")]
-        public async Task WhenRepositoryMethodIsCalledAsync(string method)
+        public async Task WhenMethodIsCalledAsync(string method)
         {
             await this.scenario.RunMethodAsync(method);
         }
 
-        [Then("the collection of Persons is created")]
+        [Then("the collection of persons is created")]
         public void ThenTheCollectionOfPersonssIsCreated()
         {
             this.scenario.CheckCollectionIsCreated();

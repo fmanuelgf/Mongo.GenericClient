@@ -1,23 +1,23 @@
-namespace Mongo.Generics.Tests.Repositories.Read
+namespace Mongo.Generics.Tests.Services.Delete
 {
     using TechTalk.SpecFlow;
 
     [Binding]
-    [Scope(Feature = "Read a Collection - Repository")]
-    public class ReadCollectionSteps
+    [Scope(Feature = "Delete a Collection - Service")]
+    public class DeleteCollectionSteps
     {
-        private readonly ReadCollectionScenario scenario;
+        private readonly DeleteCollectionScenario scenario;
 
-        public ReadCollectionSteps(ReadCollectionScenario scenario)
+        public DeleteCollectionSteps(DeleteCollectionScenario scenario)
             : base()
         {
             this.scenario = scenario;
         }
 
-        [Given("a GenericRepository of PersonEntity")]
-        public void GivenAGenericRepositoryOfPersonEntity()
+        [Given("a WriteService of PersonEntity")]
+        public void GivenAWriteServiceOfPersonEntity()
         {
-            // The repository already exists.
+            // The service already exists.
             // We just make sure that the dabase is empty.
             this.scenario.ClearDatabase();
         }
@@ -28,13 +28,13 @@ namespace Mongo.Generics.Tests.Repositories.Read
             await this.scenario.CreatePersonCollectionAsync(number);
         }
 
-        [When("calling the (.*) method of the repository collection")]
+        [When("calling the (.*) method of the WriteService")]
         public async Task WhenMethodIsCalledAsync(string method)
         {
             await this.scenario.RunMethodAsync(method);
         }
 
-        [Then("a list of (.*) PersonEntities is returned")]
+        [Then("the collection of persons count equals (.*)")]
         public void ThenTheCollectionCountEquals(int number)
         {
             this.scenario.CheckCollectionCount(number);

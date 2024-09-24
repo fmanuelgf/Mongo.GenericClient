@@ -7,7 +7,7 @@
     using MongoDB.Driver;
 
     public class GenericRepository<TEntity> : IGenericRepository<TEntity>
-        where TEntity : AuditableEntity, IEntity
+        where TEntity : IEntity
     {
         public GenericRepository()
         {

@@ -7,9 +7,9 @@ namespace Mongo.Generics.Core.Services
     using MongoDB.Bson;
 
     public interface IReadService<TEntity>
-        where TEntity : AuditableEntity, IEntity
+        where TEntity : IEntity
     {
-        IEnumerable<TEntity> GetAll(bool includeDeleted = false);
+        IEnumerable<TEntity> GetAll();
 
         Task<PaginationResult<TEntity>> GetPaginatedAsync(
             int pageNum,

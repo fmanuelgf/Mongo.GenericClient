@@ -18,30 +18,15 @@ Generic library to manage a [MongoDB](https://www.mongodb.com) database.
 
 ### Reposirory
 ```C#
-namespace Mongo.Generics.Repositories
+namespace Mongo.Generics.Core.Repositories
 {
-    using System;
-    using Mongo.Generics.Core.Attributes;
     using Mongo.Generics.Core.Entities;
     using MongoDB.Driver;
 
-    public class GenericRepository<TEntity>
-        where TEntity : AuditableEntity, IEntity
+    public interface IGenericRepository<TEntity>
+        where TEntity : IEntity
     {
-        public GenericRepository()
-        {
-            var client = new MongoClient(AppConfig.ConnectionString);
-            var database = client.GetDatabase(AppConfig.DatabaseName);
-
-            var collectionName =
-                Attribute.GetCustomAttribute(
-                    typeof(TEntity),
-                    typeof(CollectionNameAttribute)) as CollectionNameAttribute;
-
-            this.Collection = database.GetCollection<TEntity>(collectionName?.Name);
-        }
-
-        public IMongoCollection<TEntity> Collection { get; private set; }
+        IMongoCollection<TEntity> Collection { get; }
     }
 }
 ```
@@ -49,57 +34,47 @@ namespace Mongo.Generics.Repositories
 ### Services
 
 ```C#
-namespace Eudora.Domain.Core.Services
+namespace Mongo.Generics.Core.Services
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Eudora.Domain.Core.Entities;
-    using Eudora.Domain.Core.Models;
+    using Mongo.Generics.Core.Entities;
+    using Mongo.Generics.Models;
     using MongoDB.Bson;
 
     public interface IReadService<TEntity>
-        where TEntity : AuditableEntity, IEntity
+        where TEntity : IEntity
     {
-        IEnumerable<TEntity> GetAll(bool includeDeleted = false);
+        IEnumerable<TEntity> GetAll();
 
         Task<PaginationResult<TEntity>> GetPaginatedAsync(
             int pageNum,
-            int pageSize,
-            string? search = null);
+            int pageSize);
 
         Task<TEntity> GetByIdAsync(ObjectId id);
     }
 }
-
 ```
 
 ```C#
-namespace Eudora.Domain.Core.Services
+namespace Mongo.Generics.Core.Services
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Eudora.Domain.Core.Entities;
+    using Mongo.Generics.Core.Entities;
+    using MongoDB.Bson;
 
     public interface IWriteService<TEntity>
-        where TEntity : AuditableEntity, IEntity
+        where TEntity : IEntity
     {
         Task<TEntity> CreateAsync(TEntity entity);
 
-        Task CreateAsync(IEnumerable<TEntity> entities);
-
         Task<bool> UpdateAsync(TEntity entity);
 
-        Task<bool> DeleteAsync(TEntity entity);
+        Task DeleteAsync(ObjectId id);
     }
 }
 ```
 
-
-<hr>
-
-## Usage
-
-// TODO
 
 <hr>
 

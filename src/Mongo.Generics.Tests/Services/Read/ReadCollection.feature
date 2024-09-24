@@ -1,8 +1,8 @@
-Feature: Read a Collection
+Feature: Read a Collection - Service
 
 Scenario Outline: Can GetPaginatedAsync
     Given a ReadService of PersonEntity
-    And a collection of <number> PersonEntities exist(s)
+    And a collection of <number> persons exist
     When calling the GetPaginatedAsync(pageNumer: <page>, pageSize: <pageSize>) method of the ReadService
     Then a PaginationResult of PersonEntities is returned
     And the PaginationResult.Page is <page>

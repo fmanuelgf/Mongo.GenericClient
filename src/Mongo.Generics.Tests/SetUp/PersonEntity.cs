@@ -5,7 +5,7 @@ namespace Mongo.Generics.Tests.SetUp
     using MongoDB.Bson;
 
     [CollectionName("persons")]
-    public class PersonEntity : AuditableEntity, IEntity
+    public class PersonEntity : IEntity
     {
         public ObjectId Id { get ; set;  }
 

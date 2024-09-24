@@ -1,14 +1,14 @@
-namespace Mongo.Generics.Tests.Repositories.Read
+namespace Mongo.Generics.Tests.Repositories.Delete
 {
     using TechTalk.SpecFlow;
 
     [Binding]
-    [Scope(Feature = "Read a Collection - Repository")]
-    public class ReadCollectionSteps
+    [Scope(Feature = "Delete a Collection - Repository")]
+    public class DeleteCollectionSteps
     {
-        private readonly ReadCollectionScenario scenario;
+        private readonly DeleteCollectionScenario scenario;
 
-        public ReadCollectionSteps(ReadCollectionScenario scenario)
+        public DeleteCollectionSteps(DeleteCollectionScenario scenario)
             : base()
         {
             this.scenario = scenario;
@@ -17,7 +17,7 @@ namespace Mongo.Generics.Tests.Repositories.Read
         [Given("a GenericRepository of PersonEntity")]
         public void GivenAGenericRepositoryOfPersonEntity()
         {
-            // The repository already exists.
+            // The repository alDeletey exists.
             // We just make sure that the dabase is empty.
             this.scenario.ClearDatabase();
         }
@@ -34,7 +34,7 @@ namespace Mongo.Generics.Tests.Repositories.Read
             await this.scenario.RunMethodAsync(method);
         }
 
-        [Then("a list of (.*) PersonEntities is returned")]
+        [Then("the collection of persons count equals (.*)")]
         public void ThenTheCollectionCountEquals(int number)
         {
             this.scenario.CheckCollectionCount(number);

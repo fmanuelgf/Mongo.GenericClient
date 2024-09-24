@@ -8,7 +8,7 @@ namespace Mongo.Generics.Services
     using MongoDB.Driver;
 
     public class WriteService<TEntity> : IWriteService<TEntity>
-        where TEntity : AuditableEntity, IEntity
+        where TEntity : IEntity
     {
         private readonly IGenericRepository<TEntity> repository;
 
@@ -18,11 +18,9 @@ namespace Mongo.Generics.Services
             this.repository = repository;
         }
 
-        public async Task<TEntity> CreateAsync(TEntity entity)
+        public virtual async Task<TEntity> CreateAsync(TEntity entity)
         {
             entity.Id = ObjectId.GenerateNewId();
-            entity.CreatedAt = DateTime.Now;
-
             await this.repository
                 .Collection
                 .InsertOneAsync(entity);
@@ -30,13 +28,11 @@ namespace Mongo.Generics.Services
             return entity;
         }
 
-        public async Task<bool> UpdateAsync(TEntity entity)
+        public virtual async Task<bool> UpdateAsync(TEntity entity)
         {
             var filter = Builders<TEntity>
                 .Filter
                 .Eq(x => x.Id, entity.Id);
-
-            entity.UpdatedAt = DateTime.Now;
 
             var result = await this.repository
                 .Collection
@@ -45,19 +41,15 @@ namespace Mongo.Generics.Services
             return result.ModifiedCount == 1;
         }
 
-        public virtual async Task<bool> DeleteAsync(TEntity entity)
+        public virtual async Task DeleteAsync(ObjectId id)
         {
             var filter = Builders<TEntity>
                 .Filter
-                .Eq(x => x.Id, entity.Id);
-
-            entity.DeletedAt = DateTime.Now;
+                .Eq(x => x.Id, id);
 
             var result = await this.repository
                 .Collection
-                .ReplaceOneAsync(filter, entity);
-
-            return result.ModifiedCount == 1;
+                .DeleteOneAsync(filter);
         }
     }
 }

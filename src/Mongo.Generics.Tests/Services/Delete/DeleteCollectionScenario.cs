@@ -1,14 +1,15 @@
-namespace Mongo.Generics.Tests.Repositories.Read
+namespace Mongo.Generics.Tests.Services.Delete
 {
+    using System.Collections.Generic;
     using Mongo.Generics.Tests.Base;
     using Mongo.Generics.Tests.SetUp;
     using MongoDB.Driver;
 
-    public class ReadCollectionScenario : ScenarioBase<PersonEntity>
+    public class DeleteCollectionScenario : ScenarioBase<PersonEntity>
     {
         private List<PersonEntity> personEntities;
 
-        public ReadCollectionScenario()
+        public DeleteCollectionScenario()
             : base()
         {
             this.personEntities = new List<PersonEntity>();
@@ -16,18 +17,16 @@ namespace Mongo.Generics.Tests.Repositories.Read
 
         public async Task CreatePersonCollectionAsync(int number)
         {
-            var entities = DataFactory.BuildRandomPersonsList(number);
-            await this.Repository.Collection.InsertManyAsync(entities);
+            this.personEntities = DataFactory.BuildRandomPersonsList(number);
+            await this.Repository.Collection.InsertManyAsync(this.personEntities);
         }
 
         public async Task RunMethodAsync(string method)
         {
             switch (method)
             {
-                case "Find":
-                    this.personEntities = await this.Repository.Collection
-                        .Find(Builders<PersonEntity>.Filter.Empty)
-                        .ToListAsync();
+                case "DeleteAsync":
+                    await this.WriteService.DeleteAsync(this.personEntities.Last().Id);
                     break;
 
                 default:
@@ -37,7 +36,10 @@ namespace Mongo.Generics.Tests.Repositories.Read
 
         public void CheckCollectionCount(int expectedCount)
         {
-            Assert.That(this.personEntities.Count, Is.EqualTo(expectedCount));
+            Assert.That(
+                this.Repository.Collection.CountDocuments(Builders<PersonEntity>.Filter.Empty),
+                Is.EqualTo(expectedCount)
+            );
         }
     }
 }

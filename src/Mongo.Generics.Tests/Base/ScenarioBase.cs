@@ -10,7 +10,7 @@ namespace Mongo.Generics.Tests.Base
     using MongoDB.Driver;
 
     public abstract class ScenarioBase<TEntity> : IDisposable
-        where TEntity : AuditableEntity, IEntity
+        where TEntity : IEntity
     {
         protected IGenericRepository<TEntity> Repository { get; set; }
         

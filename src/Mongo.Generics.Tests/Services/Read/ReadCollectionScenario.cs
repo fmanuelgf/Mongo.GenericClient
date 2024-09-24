@@ -16,7 +16,7 @@ namespace Mongo.Generics.Tests.Services.Read
 
         public async Task CreatePersonCollectionAsync(int number)
         {
-            var entities = DataFactory.BuildPersonEntities(number);
+            var entities = DataFactory.BuildRandomPersonsList(number);
             await this.Repository.Collection.InsertManyAsync(entities);
         }
 

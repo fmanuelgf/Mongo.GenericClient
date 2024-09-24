@@ -1,47 +1,37 @@
-namespace Mongo.Generics.Tests.Repositories.Create
+namespace Mongo.Generics.Tests.Repositories.Delete
 {
     using Mongo.Generics.Tests.Base;
     using Mongo.Generics.Tests.SetUp;
     using MongoDB.Driver;
 
-    public class CreateCollectionScenario : ScenarioBase<PersonEntity>
+    public class DeleteCollectionScenario : ScenarioBase<PersonEntity>
     {
         private List<PersonEntity> personEntities;
 
-        public CreateCollectionScenario()
+        public DeleteCollectionScenario()
             : base()
         {
             this.personEntities = new List<PersonEntity>();
         }
 
-        public void CreatePersonEntities(int number)
+        public async Task CreatePersonCollectionAsync(int number)
         {
             this.personEntities = DataFactory.BuildRandomPersonsList(number);
+            await this.Repository.Collection.InsertManyAsync(this.personEntities);
         }
 
         public async Task RunMethodAsync(string method)
         {
+            var filter = Builders<PersonEntity>.Filter.Eq(x => x.Id, this.personEntities.Last().Id);
             switch (method)
             {
-                case "InsertOneAsync":
-                    await this.Repository.Collection.InsertOneAsync(this.personEntities.First());
-                    break;
-
-                case "InsertManyAsync":
-                    await this.Repository.Collection.InsertManyAsync(this.personEntities);
+                case "DeleteOneAsync":
+                    await this.Repository.Collection.DeleteOneAsync(filter);
                     break;
 
                 default:
                     throw new ArgumentException($"Unknown method {method}");
             }
-        }
-
-        public void CheckCollectionIsCreated()
-        {
-            Assert.That(
-                this.Repository.Collection.CountDocuments(Builders<PersonEntity>.Filter.Empty),
-                Is.GreaterThan(0)
-            );
         }
 
         public void CheckCollectionCount(int expectedCount)

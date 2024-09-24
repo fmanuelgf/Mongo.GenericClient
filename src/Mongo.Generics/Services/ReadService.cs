@@ -11,7 +11,7 @@ namespace Mongo.Generics.Services
     using MongoDB.Driver;
 
     public class ReadService<TEntity> : IReadService<TEntity>
-        where TEntity : AuditableEntity, IEntity
+        where TEntity : IEntity
     {
         private readonly IGenericRepository<TEntity> repository;
 
@@ -21,12 +21,11 @@ namespace Mongo.Generics.Services
             this.repository = repository;
         }
 
-        public IEnumerable<TEntity> GetAll(bool includeDeleted = false)
+        public IEnumerable<TEntity> GetAll()
         {
             return this.repository
                 .Collection
                 .AsQueryable()
-                .Where(x => includeDeleted || x.DeletedAt == null)
                 .ToList();
         }
 
@@ -44,7 +43,7 @@ namespace Mongo.Generics.Services
                 pageSize = 1;
             }
 
-            var filter = Builders<TEntity>.Filter.Eq(x => x.DeletedAt, null);
+            var filter = Builders<TEntity>.Filter.Empty;
             var totalCount = this.repository
                 .Collection
                 .CountDocuments(filter);

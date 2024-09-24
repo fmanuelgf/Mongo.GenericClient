@@ -1,7 +1,5 @@
 namespace Mongo.Generics.Tests.Repositories.Create
 {
-    using Mongo.Generics.Tests.Base;
-    using Mongo.Generics.Tests.SetUp;
     using TechTalk.SpecFlow;
 
     [Binding]
@@ -32,12 +30,12 @@ namespace Mongo.Generics.Tests.Repositories.Create
         }
 
         [When("calling the (.*) method of the repository collection")]
-        public async Task WhenRepositoryMethodIsCalledAsync(string method)
+        public async Task WhenMethodIsCalledAsync(string method)
         {
             await this.scenario.RunMethodAsync(method);
         }
 
-        [Then("the collection of Persons is created")]
+        [Then("the collection of persons is created")]
         public void ThenTheCollectionOfPersonssIsCreated()
         {
             this.scenario.CheckCollectionIsCreated();

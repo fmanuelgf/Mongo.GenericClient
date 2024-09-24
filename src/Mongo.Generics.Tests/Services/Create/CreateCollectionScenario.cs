@@ -16,7 +16,7 @@ namespace Mongo.Generics.Tests.Services.Create
 
         public void CreatePersonEntities(int number)
         {
-            this.personEntities = DataFactory.BuildPersonEntities(number);
+            this.personEntities = DataFactory.BuildRandomPersonsList(number);
         }
 
         public async Task RunMethodAsync(string method)

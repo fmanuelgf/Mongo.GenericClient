@@ -4,7 +4,7 @@ namespace Mongo.Generics.Core.Repositories
     using MongoDB.Driver;
 
     public interface IGenericRepository<TEntity>
-        where TEntity : AuditableEntity, IEntity
+        where TEntity : IEntity
     {
         IMongoCollection<TEntity> Collection { get; }
     }
