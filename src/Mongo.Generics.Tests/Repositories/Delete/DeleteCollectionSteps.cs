@@ -3,7 +3,7 @@ namespace Mongo.Generics.Tests.Repositories.Delete
     using TechTalk.SpecFlow;
 
     [Binding]
-    [Scope(Feature = "Delete a Collection - Repository")]
+    [Scope(Feature = "Delete from a Collection - Repository")]
     public class DeleteCollectionSteps
     {
         private readonly DeleteCollectionScenario scenario;

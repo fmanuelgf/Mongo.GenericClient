@@ -3,7 +3,7 @@ namespace Mongo.Generics.Tests.Services.Delete
     using TechTalk.SpecFlow;
 
     [Binding]
-    [Scope(Feature = "Delete a Collection - Service")]
+    [Scope(Feature = "Delete from a Collection - Service")]
     public class DeleteCollectionSteps
     {
         private readonly DeleteCollectionScenario scenario;

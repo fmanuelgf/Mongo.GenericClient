@@ -1,4 +1,4 @@
-Feature: Delete a Collection - Service
+Feature: Delete from a Collection - Service
 
 Scenario: Can DeleteAsync
     Given a WriteService of PersonEntity

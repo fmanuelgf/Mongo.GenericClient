@@ -1,4 +1,4 @@
-Feature: Delete a Collection - Repository
+Feature: Delete from a Collection - Repository
 
 Scenario: Can DeleteOneAsync
     Given a GenericRepository of PersonEntity
