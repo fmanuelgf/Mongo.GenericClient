@@ -10,7 +10,7 @@ Generic library to manage a [MongoDB](https://www.mongodb.com) database.
 
 - `"MONGODB_CONNECTION_STRING"` (e.g., "mongodb://root:root@localhost:27017")
 
-- `"MONGODB_DATABASE_NAME"` (e.g., "my_blob_storage")
+- `"MONGODB_DATABASE_NAME"` (e.g., "my_mongodb")
 
 <hr>
 
@@ -75,6 +75,41 @@ namespace Mongo.Generics.Core.Services
 }
 ```
 
+<hr>
+
+## Usage
+
+Defining an entity and its collection name:
+```C#
+namespace Mongo.Generics.Tests.SetUp
+{
+    using Mongo.Generics.Core.Attributes;
+    using Mongo.Generics.Core.Entities;
+    using MongoDB.Bson;
+
+    [CollectionName("persons")]
+    public class PersonEntity : IEntity
+    {
+        public ObjectId Id { get ; set;  }
+
+        public string Name { get; set; } = string.Empty;
+
+        public int Age { get; set; }
+    }
+}
+```
+
+Creating a collection (or just inserting data) ...
+
+using the repository
+```C#
+await this.repository.Collection.InsertOneAsync(entity);
+```
+
+using the service
+```C#
+await this.WriteService.CreateAsync(entity);
+```
 
 <hr>
 
