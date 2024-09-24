@@ -18,7 +18,7 @@ namespace Mongo.Generics.Tests.Services.Read
         public void GivenAReadServiceOfPersonEntity()
         {
             // The service already exists.
-            // We just make sure that the dabase is empty.
+            // We just make sure that the database is empty.
             this.scenario.ClearDatabase();
         }
 
@@ -40,7 +40,7 @@ namespace Mongo.Generics.Tests.Services.Read
             this.scenario.CheckPageResultIsReturned();
         }
 
-        [Then("the PaginationResult.(.*) is (.*)")]
+        [Then("the PaginationResult.(.*) equals (.*)")]
         public void ThenPaginationResultFieldEquals(string field, int number)
         {
             this.scenario.CheckPaginationResultField(field, number);

@@ -18,7 +18,7 @@ namespace Mongo.Generics.Tests.Services.Update
         public void GivenAWriteServiceOfPersonEntity()
         {
             // The service already exists.
-            // We just make sure that the dabase is empty.
+            // We just make sure that the database is empty.
             this.scenario.ClearDatabase();
         }
 
@@ -40,7 +40,7 @@ namespace Mongo.Generics.Tests.Services.Update
             await this.scenario.RunMethodAsync(method);
         }
 
-        [Then("the person (.*) in the collection is (.*)")]
+        [Then("the person (.*) in the collection equals (.*)")]
         public async Task ThenTheCollectionEntityIsUpdatedAsync(string field, string value)
         {
             await this.scenario.CheckTheEntityIsUpdatedAsync(field, value);

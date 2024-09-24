@@ -18,7 +18,7 @@ namespace Mongo.Generics.Tests.Repositories.Delete
         public void GivenAGenericRepositoryOfPersonEntity()
         {
             // The repository alDeletey exists.
-            // We just make sure that the dabase is empty.
+            // We just make sure that the database is empty.
             this.scenario.ClearDatabase();
         }
 

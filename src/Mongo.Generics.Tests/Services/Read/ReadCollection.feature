@@ -5,10 +5,10 @@ Scenario Outline: Can GetPaginatedAsync
     And a collection of <number> persons exist
     When calling the GetPaginatedAsync(pageNumer: <page>, pageSize: <pageSize>) method of the ReadService
     Then a PaginationResult of PersonEntities is returned
-    And the PaginationResult.Page is <page>
-    And the PaginationResult.PageSize is <pageSize>
-    And the PaginationResult.TotalItems is <number>
-    And the PaginationResult.Result.Count is <pageItems>
+    And the PaginationResult.Page equals <page>
+    And the PaginationResult.PageSize equals <pageSize>
+    And the PaginationResult.TotalItems equals <number>
+    And the PaginationResult.Result.Count equals <pageItems>
 
     Examples:
         | number | page | pageSize | pageItems |
