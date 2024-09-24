@@ -21,7 +21,7 @@ namespace Mongo.Generics.Services
             this.repository = repository;
         }
 
-        public IEnumerable<TEntity> GetAll()
+        public virtual IEnumerable<TEntity> GetAll()
         {
             return this.repository
                 .Collection
@@ -29,7 +29,7 @@ namespace Mongo.Generics.Services
                 .ToList();
         }
 
-        public async Task<PaginationResult<TEntity>> GetPaginatedAsync(
+        public virtual async Task<PaginationResult<TEntity>> GetPaginatedAsync(
             int pageNum,
             int pageSize)
         {
@@ -64,7 +64,7 @@ namespace Mongo.Generics.Services
             };
         }
 
-        public async Task<TEntity> GetByIdAsync(ObjectId id)
+        public virtual async Task<TEntity> GetByIdAsync(ObjectId id)
         {
             var filter = Builders<TEntity>
                 .Filter
