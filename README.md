@@ -2,7 +2,7 @@
 
 Generic library to manage a [MongoDB](https://www.mongodb.com) database.
 
-Source code: [https://github.com/fmanuelgf/Mongo.BlobStorage](https://github.com/fmanuelgf/Mongo.BlobStorage)
+Source code: [https://github.com/fmanuelgf/Mongo.Generics](https://github.com/fmanuelgf/Mongo.Generics)
 
 ##  Required environment variables
 
