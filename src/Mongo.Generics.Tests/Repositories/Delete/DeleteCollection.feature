@@ -4,4 +4,4 @@ Scenario: Can DeleteOneAsync
     Given a GenericRepository of PersonEntity
     And a collection of 10 persons exist
     When calling the DeleteOneAsync method of the repository collection
-    Then the collection of persons count equals 9
+    Then the count of the collection of persons is equal to 9

@@ -34,7 +34,7 @@ namespace Mongo.Generics.Tests.Repositories.Delete
             await this.scenario.RunMethodAsync(method);
         }
 
-        [Then("the collection of persons count equals (.*)")]
+        [Then("the count of the collection of persons is equal to (.*)")]
         public void ThenTheCollectionCountEquals(int number)
         {
             this.scenario.CheckCollectionCount(number);

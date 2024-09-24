@@ -5,4 +5,4 @@ Scenario: Can CreateAsync
     And 1 PersonEntity
     When calling the CreateAsync method of the WriteService
     Then the collection of persons is created
-    And the collection count equals 1
+    And the count of the collection of persons is equal to 1
