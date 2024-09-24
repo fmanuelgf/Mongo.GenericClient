@@ -41,7 +41,7 @@ namespace Mongo.Generics.Tests.Services.Create
             this.scenario.CheckCollectionIsCreated();
         }
 
-        [Then("the count of the collection of persons is equal to (.*)")]
+        [Then("the count of the collection of persons equals (.*)")]
         public void ThenTheCollectionCountEquals(int number)
         {
             this.scenario.CheckCollectionCount(number);

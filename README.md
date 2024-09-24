@@ -75,11 +75,26 @@ namespace Mongo.Generics.Core.Services
 }
 ```
 
+### IEntity
+```C#
+namespace Mongo.Generics.Core.Entities
+{
+    using MongoDB.Bson;
+
+    public interface IEntity
+    {
+        ObjectId Id { get; set; }
+    }
+}
+```
+
 <hr>
 
 ## Usage
 
 Defining an entity and its collection name:
+
+- The class must implement `IEntity` and have the attribute `CollectionName`
 ```C#
 namespace Mongo.Generics.Tests.SetUp
 {
@@ -99,14 +114,14 @@ namespace Mongo.Generics.Tests.SetUp
 }
 ```
 
-Creating a collection (or just inserting data) ...
+Creating a collection (or just inserting data)
 
-using the repository
+- Using the repository
 ```C#
 await this.repository.Collection.InsertOneAsync(entity);
 ```
 
-using the service
+- Using the service
 ```C#
 await this.writeService.CreateAsync(entity);
 ```

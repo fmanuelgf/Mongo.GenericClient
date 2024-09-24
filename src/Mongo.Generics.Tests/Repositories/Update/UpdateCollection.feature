@@ -5,7 +5,7 @@ Scenario Outline: Can ReplaceOneAsync
     And a collection of 1 persons exist
     And the PersonEntity.<field> is modified to <value>
     When calling the ReplaceOneAsync method of the repository collection
-    Then the person <field> in the collection equals <value>
+    Then person.<field> in the collection equals <value>
 
     Examples:
         | field | value |

@@ -40,7 +40,7 @@ namespace Mongo.Generics.Tests.Services.Update
             await this.scenario.RunMethodAsync(method);
         }
 
-        [Then("the person (.*) in the collection equals (.*)")]
+        [Then("person.(.*) in the collection equals (.*)")]
         public async Task ThenTheCollectionEntityIsUpdatedAsync(string field, string value)
         {
             await this.scenario.CheckTheEntityIsUpdatedAsync(field, value);
