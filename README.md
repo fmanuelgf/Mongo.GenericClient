@@ -2,9 +2,7 @@
 
 Generic library to manage a [MongoDB](https://www.mongodb.com) database.
 
-[MIT License](LICENSE)
-
-<hr>
+Source code: [https://github.com/fmanuelgf/Mongo.BlobStorage](https://github.com/fmanuelgf/Mongo.BlobStorage)
 
 ##  Required environment variables
 
@@ -12,11 +10,11 @@ Generic library to manage a [MongoDB](https://www.mongodb.com) database.
 
 - `"MONGODB_DATABASE_NAME"` (e.g., "my_mongodb")
 
-<hr>
 
 ## Interfaces
 
-### Reposirory
+Reposirory
+
 ```C#
 namespace Mongo.Generics.Core.Repositories
 {
@@ -31,7 +29,7 @@ namespace Mongo.Generics.Core.Repositories
 }
 ```
 
-### Services
+Services
 
 ```C#
 namespace Mongo.Generics.Core.Services
@@ -75,7 +73,8 @@ namespace Mongo.Generics.Core.Services
 }
 ```
 
-### IEntity
+IEntity
+
 ```C#
 namespace Mongo.Generics.Core.Entities
 {
@@ -87,8 +86,6 @@ namespace Mongo.Generics.Core.Entities
     }
 }
 ```
-
-<hr>
 
 ## Usage
 
@@ -125,8 +122,6 @@ await this.repository.Collection.InsertOneAsync(entity);
 ```C#
 await this.writeService.CreateAsync(entity);
 ```
-
-<hr>
 
 ## Note
 
