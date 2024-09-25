@@ -6,6 +6,9 @@ namespace Mongo.Generics.Core.Repositories
     public interface IGenericRepository<TEntity>
         where TEntity : IEntity
     {
+        /// <summary>
+        /// The collection of <see cref="TEntity"/>.
+        /// </summary>
         IMongoCollection<TEntity> Collection { get; }
     }
 }

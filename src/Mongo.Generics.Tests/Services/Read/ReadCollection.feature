@@ -15,3 +15,9 @@ Scenario Outline: Can GetPaginatedAsync
         | 1      | 1    | 5        | 1         |
         | 10     | 2    | 4        | 4         |
         | 100    | 4    | 10       | 10        |
+
+Scenario: Can get the documents count using AsQueryable
+    Given a ReadService of PersonEntity
+    And a collection of 50 persons exist
+    When calling the AsQueryable method of the ReadService
+    Then Count equals 50

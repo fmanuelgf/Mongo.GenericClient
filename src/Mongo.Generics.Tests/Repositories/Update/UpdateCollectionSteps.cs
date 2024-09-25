@@ -23,7 +23,7 @@ namespace Mongo.Generics.Tests.Repositories.Update
         }
 
         [Given(@"a collection of 1 persons exist")]
-        public async Task GivenAListOfPersonEntitiesAsync()
+        public async Task GivenAPersonsCollectionAsync()
         {
             await this.scenario.CreatePersonCollectionAsync();
         }

@@ -45,6 +45,8 @@ namespace Mongo.Generics.Core.Services
     {
         IEnumerable<TEntity> GetAll();
 
+        IMongoQueryable<TEntity> AsQueryable();
+
         Task<PaginationResult<TEntity>> GetPaginatedAsync(
             int pageNum,
             int pageSize);

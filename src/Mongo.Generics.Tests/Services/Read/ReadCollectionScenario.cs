@@ -4,10 +4,12 @@ namespace Mongo.Generics.Tests.Services.Read
     using Mongo.Generics.Tests.Base;
     using Mongo.Generics.Tests.SetUp;
     using MongoDB.Driver;
+    using MongoDB.Driver.Linq;
 
     public class ReadCollectionScenario : ScenarioBase<PersonEntity>
     {
         private PaginationResult<PersonEntity>? pagination;
+        private IMongoQueryable<PersonEntity>? query;
 
         public ReadCollectionScenario()
             : base()
@@ -20,12 +22,12 @@ namespace Mongo.Generics.Tests.Services.Read
             await this.Repository.Collection.InsertManyAsync(entities);
         }
 
-        public async Task RunMethodAsync(string method, int pageNum, int pageSize)
+        public void RunMethod(string method)
         {
             switch (method)
             {
-                case "GetPaginatedAsync":
-                    this.pagination = await this.ReadService.GetPaginatedAsync(pageNum, pageSize);
+                case "AsQueryable":
+                    this.query = this.ReadService.AsQueryable();
                     break;
 
                 default:
@@ -33,9 +35,19 @@ namespace Mongo.Generics.Tests.Services.Read
             }
         }
 
+        public async Task RunGetPaginatedAsyncAsync(int pageNum, int pageSize)
+        {
+            this.pagination = await this.ReadService.GetPaginatedAsync(pageNum, pageSize);
+        }
+
         public void CheckPageResultIsReturned()
         {
             Assert.That(this.pagination?.Result, Is.Not.Null);
+        }
+
+        public void CheckCount(int expectedCount)
+        {
+            Assert.That(this.query?.Count(), Is.EqualTo(expectedCount));
         }
 
         public void CheckPaginationResultField(string field, int expectedValue)

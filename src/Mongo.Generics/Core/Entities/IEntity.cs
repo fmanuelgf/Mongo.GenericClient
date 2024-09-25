@@ -4,6 +4,9 @@ namespace Mongo.Generics.Core.Entities
 
     public interface IEntity
     {
+        /// <summary>
+        /// The entity ID
+        /// </summary>
         ObjectId Id { get; set; }
     }
 }

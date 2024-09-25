@@ -23,7 +23,7 @@ namespace Mongo.Generics.Tests.Repositories.Read
         }
 
         [Given(@"a collection of (.*) persons exist")]
-        public async Task GivenAListOfPersonEntitiesAsync(int number)
+        public async Task GivenAPersonsCollectionAsync(int number)
         {
             await this.scenario.CreatePersonCollectionAsync(number);
         }

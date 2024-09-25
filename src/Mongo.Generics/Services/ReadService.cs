@@ -9,6 +9,7 @@ namespace Mongo.Generics.Services
     using Mongo.Generics.Models;
     using MongoDB.Bson;
     using MongoDB.Driver;
+    using MongoDB.Driver.Linq;
 
     public class ReadService<TEntity> : IReadService<TEntity>
         where TEntity : IEntity
@@ -27,6 +28,13 @@ namespace Mongo.Generics.Services
                 .Collection
                 .AsQueryable()
                 .ToList();
+        }
+
+        public virtual IMongoQueryable<TEntity> AsQueryable()
+        {
+            return this.repository
+                .Collection
+                .AsQueryable();
         }
 
         public virtual async Task<PaginationResult<TEntity>> GetPaginatedAsync(
