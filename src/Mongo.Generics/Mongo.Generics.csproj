@@ -10,6 +10,10 @@
     <PackageId>$(ProjectName)</PackageId>
     <Authors>Francisco González</Authors>
     <Version>$(Package-Version)</Version>
+    <Description>
+      Generic library to manage a MongoDB database.
+      Source code: https://github.com/fmanuelgf/Mongo.Generics
+    </Description>
   </PropertyGroup>
 
   <ItemGroup>

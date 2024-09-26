@@ -2,8 +2,6 @@
 
 Generic library to manage a [MongoDB](https://www.mongodb.com) database.
 
-Source code: [https://github.com/fmanuelgf/Mongo.Generics](https://github.com/fmanuelgf/Mongo.Generics)
-
 ##  Required environment variables
 
 - `"MONGODB_CONNECTION_STRING"` (e.g., "mongodb://root:root@localhost:27017")
@@ -14,7 +12,6 @@ Source code: [https://github.com/fmanuelgf/Mongo.Generics](https://github.com/fm
 ## Interfaces
 
 Reposirory
-
 ```C#
 namespace Mongo.Generics.Core.Repositories
 {
@@ -30,7 +27,6 @@ namespace Mongo.Generics.Core.Repositories
 ```
 
 Services
-
 ```C#
 namespace Mongo.Generics.Core.Services
 {
@@ -76,7 +72,6 @@ namespace Mongo.Generics.Core.Services
 ```
 
 IEntity
-
 ```C#
 namespace Mongo.Generics.Core.Entities
 {
@@ -88,6 +83,7 @@ namespace Mongo.Generics.Core.Entities
     }
 }
 ```
+
 
 ## Usage
 
@@ -124,6 +120,7 @@ await this.repository.Collection.InsertOneAsync(entity);
 ```C#
 await this.writeService.CreateAsync(entity);
 ```
+
 
 ## Note
 
