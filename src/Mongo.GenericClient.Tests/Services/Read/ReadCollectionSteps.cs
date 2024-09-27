@@ -28,16 +28,40 @@ namespace Mongo.GenericClient.Tests.Services.Read
             await this.scenario.CreatePersonCollectionAsync(number);
         }
 
-        [When(@"calling the GetPaginatedAsync\(pageNumer: (.*), pageSize: (.*)\) method of the ReadService")]
-        public async Task WhenMethodIsCalledAsync(int pageNum, int pageSize)
+        [Given(@"(.*) of the persons have the Name '(.*)'")]
+        public async Task GivenSomePersonsName(int number, string name)
         {
-            await this.scenario.RunGetPaginatedAsyncAsync(pageNum, pageSize);
+            await this.scenario.UpdatePersonsName(number, name);
         }
 
-        [When(@"calling the (AsQueryable) method of the ReadService")]
-        public void WhenMethodIsCalled(string method)
+        [Given(@"1 of the persons have the Name '(.*)' and Id xyz")]
+        public async Task GivenSomePersonsName(string name)
         {
-            this.scenario.RunMethod(method);
+            await this.scenario.UpdatePersonsName(1, name);
+        }
+
+        [When(@"calling the GetPaginatedAsync\(pageNumer: (.*), pageSize: (.*)\) method of the ReadService with (.*) filter")]
+        public async Task WhenMethodIsCalledAsync(int pageNum, int pageSize, string filter)
+        {
+            await this.scenario.RunGetPaginatedAsyncAsync(pageNum, pageSize, filter);
+        }
+
+        [When("calling the AsQueryable method of the ReadService")]
+        public async Task WhenAsQueryableMethodIsCalledAsync()
+        {
+            await this.scenario.RunMethod("AsQueryable");
+        }
+
+        [When("calling the GetByIdAsync xyz as (.*) method of the ReadService")]
+        public async Task WhenGetByIdMethodIsCalledAsync(string asType)
+        {
+            await this.scenario.RunMethod("GetByIdAsync", asType);
+        }
+
+        [When(@"calling the GetAll method of the ReadService with (.*) filter")]
+        public async Task WhenMethodIsCalledAsync(string filter)
+        {
+            await this.scenario.RunMethod("GetAll", filter);
         }
 
         [Then("a PaginationResult of PersonEntities is returned")]
@@ -56,6 +80,21 @@ namespace Mongo.GenericClient.Tests.Services.Read
         public void ThenCountEquals(int number)
         {
             this.scenario.CheckCount(number);
+        }
+
+        [Then("(1) PersonEntity is returned")]
+        [Then("(.*) PersonEntities are returned")]
+        public void ThenPersonEntitiesAreReturned(int number)
+        {
+            this.scenario.CheckPersonEntitiesCount(number);
+        }
+
+        [Then("(.*) of the PersonEntities have the Name '(.*)'")]
+        [Then("(the) PersonEntity has the Name '(.*)'")]
+        public void ThenPersonEntitiesNames(string howMany, string name)
+        {
+            var number = howMany == "the" ? 1 : int.Parse(howMany);
+            this.scenario.CheckPersonEntitiesName(number, name);
         }
     }
 }

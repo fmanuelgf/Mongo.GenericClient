@@ -39,15 +39,22 @@ namespace Mongo.GenericClient.Core.Services
     public interface IReadService<TEntity>
         where TEntity : IEntity
     {
-        IEnumerable<TEntity> GetAll();
+        IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter = null);
 
         IMongoQueryable<TEntity> AsQueryable();
 
         Task<PaginationResult<TEntity>> GetPaginatedAsync(
             int pageNum,
             int pageSize);
+        
+        Task<PaginationResult<TEntity>> GetPaginatedAsync(
+            Expression<Func<TEntity, bool>> filter,
+            int pageNum,
+            int pageSize);
 
         Task<TEntity> GetByIdAsync(ObjectId id);
+
+        Task<TEntity> GetByIdAsync(string id);
     }
 }
 ```
@@ -89,7 +96,7 @@ namespace Mongo.GenericClient.Core.Entities
 
 Defining an entity and its collection name:
 
-- The class must implement `IEntity` and have the attribute `CollectionName`
+_The class must implement `IEntity` and have the attribute `CollectionName`_
 ```C#
 namespace Mongo.GenericClient.Tests.SetUp
 {
@@ -111,15 +118,22 @@ namespace Mongo.GenericClient.Tests.SetUp
 
 Creating a collection (or just inserting data)
 
-- Using the repository
+_Using the repository_
 ```C#
 await this.repository.Collection.InsertOneAsync(entity);
 ```
 
-- Using the service
+_Using the service_
 ```C#
 await this.writeService.CreateAsync(entity);
 ```
+
+Getting a list of documents as entities
+
+```C#
+var allEntities = this.readService.GetAll()
+var filteredEntities = this.readService.GetAll(x => x.Age == 30)
+````
 
 
 ## Note

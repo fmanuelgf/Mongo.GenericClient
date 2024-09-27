@@ -6,22 +6,22 @@ namespace Mongo.GenericClient.Tests.SetUp
     {
         private static readonly Random random= new Random((int)DateTime.Today.Ticks);
         
-        public static PersonEntity BuildRandomPerson()
+        public static PersonEntity BuildRandomPerson(string name)
         {
             return new PersonEntity
             {
                 Id = ObjectId.GenerateNewId(),
-                Name = $"Person {random.Next(1, 1000):000}",
+                Name = name,
                 Age = random.Next(1, 91)
             };
         }
 
-        public static List<PersonEntity> BuildRandomPersonsList(int number)
+        public static List<PersonEntity> BuildRandomPersonsList(int number, string? name = null)
         {
             var result = new List<PersonEntity>();
             while (number-- > 0)
             {
-                result.Add(BuildRandomPerson());
+                result.Add(BuildRandomPerson(name ?? $"Person {number}"));
             }
 
             return result;

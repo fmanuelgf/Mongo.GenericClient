@@ -3,17 +3,21 @@ namespace Mongo.GenericClient.Tests.Services.Read
     using Mongo.GenericClient.Models;
     using Mongo.GenericClient.Tests.Base;
     using Mongo.GenericClient.Tests.SetUp;
+    using MongoDB.Bson;
     using MongoDB.Driver;
     using MongoDB.Driver.Linq;
 
     public class ReadCollectionScenario : ScenarioBase<PersonEntity>
     {
         private PaginationResult<PersonEntity>? pagination;
+        private IList<PersonEntity> personEntities;
         private IMongoQueryable<PersonEntity>? query;
+        private ObjectId objectId;
 
         public ReadCollectionScenario()
             : base()
         {
+            this.personEntities = new List<PersonEntity>();
         }
 
         public async Task CreatePersonCollectionAsync(int number)
@@ -22,7 +26,27 @@ namespace Mongo.GenericClient.Tests.Services.Read
             await this.Repository.Collection.InsertManyAsync(entities);
         }
 
-        public void RunMethod(string method)
+        public async Task UpdatePersonsName(int number, string name)
+        {
+            var entities = this.Repository.Collection
+                .AsQueryable()
+                .Take(number)
+                .ToList();
+
+            if (entities.Count == 1)
+            {
+                this.objectId = entities.First().Id;
+            }
+
+            foreach (var entity in entities)
+            {
+                var filter = Builders<PersonEntity>.Filter.Eq(x => x.Id, entity.Id);
+                entity.Name = name;
+                await this.Repository.Collection.ReplaceOneAsync(filter, entity);
+            }
+        }
+
+        public async Task RunMethod(string method, string? filter = null)
         {
             switch (method)
             {
@@ -30,14 +54,29 @@ namespace Mongo.GenericClient.Tests.Services.Read
                     this.query = this.ReadService.AsQueryable();
                     break;
 
+                case "GetAll":
+                    this.personEntities = filter == "name is John"
+                        ? this.ReadService.GetAll(x => x.Name == "John")
+                        : this.ReadService.GetAll();
+                    break;
+
+                case "GetByIdAsync":
+                    var person = filter == "as string"
+                        ? await this.ReadService.GetByIdAsync(this.objectId.ToString())
+                        : await this.ReadService.GetByIdAsync(this.objectId);
+                    this.personEntities.Add(person);
+                    break;
+
                 default:
                     throw new ArgumentException($"Unknown method {method}");
             }
         }
 
-        public async Task RunGetPaginatedAsyncAsync(int pageNum, int pageSize)
+        public async Task RunGetPaginatedAsyncAsync(int pageNum, int pageSize, string? filter = null)
         {
-            this.pagination = await this.ReadService.GetPaginatedAsync(pageNum, pageSize);
+            this.pagination = filter == "name is John"
+                ? await this.ReadService.GetPaginatedAsync(x => x.Name == "John", pageNum, pageSize)
+                : await this.ReadService.GetPaginatedAsync(pageNum, pageSize);
         }
 
         public void CheckPageResultIsReturned()
@@ -48,6 +87,16 @@ namespace Mongo.GenericClient.Tests.Services.Read
         public void CheckCount(int expectedCount)
         {
             Assert.That(this.query?.Count(), Is.EqualTo(expectedCount));
+        }
+
+        public void CheckPersonEntitiesCount(int expectedCount)
+        {
+            Assert.That(this.personEntities.Count(), Is.EqualTo(expectedCount));
+        }
+
+        public void CheckPersonEntitiesName(int expectedCount, string name)
+        {
+            Assert.That(this.personEntities.Count(x => x.Name == name), Is.EqualTo(expectedCount));
         }
 
         public void CheckPaginationResultField(string field, int expectedValue)

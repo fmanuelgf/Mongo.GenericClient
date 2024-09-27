@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageOutputPath>../package</PackageOutputPath>
+    <PackageOutputPath>..\package</PackageOutputPath>
     <PackageId>$(ProjectName)</PackageId>
     <Authors>Francisco González</Authors>
     <Version>$(Package-Version)</Version>
@@ -17,6 +17,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/fmanuelgf/Mongo.GenericClient</RepositoryUrl> 
     <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>$([System.IO.File]::ReadAllText("CHANGELOG.md"))</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

@@ -10,7 +10,7 @@ namespace Mongo.GenericClient.Tests.Services.Update
         public UpdateCollectionScenario()
             : base()
         {
-            this.personToUpdate = DataFactory.BuildRandomPerson();
+            this.personToUpdate = DataFactory.BuildRandomPerson("John");
         }
 
         public async Task CreatePersonCollectionAsync()

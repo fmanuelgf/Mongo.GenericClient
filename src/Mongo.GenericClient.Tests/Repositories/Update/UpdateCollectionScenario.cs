@@ -11,7 +11,7 @@ namespace Mongo.GenericClient.Tests.Repositories.Update
         public UpdateCollectionScenario()
             : base()
         {
-            this.personToUpdate = DataFactory.BuildRandomPerson();
+            this.personToUpdate = DataFactory.BuildRandomPerson("John");
         }
 
         public async Task CreatePersonCollectionAsync()
