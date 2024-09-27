@@ -1,4 +1,4 @@
-# Mongo.Generics
+# Mongo.GenericClient
 
 Generic library to manage a [MongoDB](https://www.mongodb.com) database.
 
@@ -13,9 +13,9 @@ Generic library to manage a [MongoDB](https://www.mongodb.com) database.
 
 Reposirory
 ```C#
-namespace Mongo.Generics.Core.Repositories
+namespace Mongo.GenericClient.Core.Repositories
 {
-    using Mongo.Generics.Core.Entities;
+    using Mongo.GenericClient.Core.Entities;
     using MongoDB.Driver;
 
     public interface IGenericRepository<TEntity>
@@ -28,12 +28,12 @@ namespace Mongo.Generics.Core.Repositories
 
 Services
 ```C#
-namespace Mongo.Generics.Core.Services
+namespace Mongo.GenericClient.Core.Services
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Mongo.Generics.Core.Entities;
-    using Mongo.Generics.Models;
+    using Mongo.GenericClient.Core.Entities;
+    using Mongo.GenericClient.Models;
     using MongoDB.Bson;
 
     public interface IReadService<TEntity>
@@ -53,10 +53,10 @@ namespace Mongo.Generics.Core.Services
 ```
 
 ```C#
-namespace Mongo.Generics.Core.Services
+namespace Mongo.GenericClient.Core.Services
 {
     using System.Threading.Tasks;
-    using Mongo.Generics.Core.Entities;
+    using Mongo.GenericClient.Core.Entities;
     using MongoDB.Bson;
 
     public interface IWriteService<TEntity>
@@ -73,7 +73,7 @@ namespace Mongo.Generics.Core.Services
 
 IEntity
 ```C#
-namespace Mongo.Generics.Core.Entities
+namespace Mongo.GenericClient.Core.Entities
 {
     using MongoDB.Bson;
 
@@ -91,10 +91,10 @@ Defining an entity and its collection name:
 
 - The class must implement `IEntity` and have the attribute `CollectionName`
 ```C#
-namespace Mongo.Generics.Tests.SetUp
+namespace Mongo.GenericClient.Tests.SetUp
 {
-    using Mongo.Generics.Core.Attributes;
-    using Mongo.Generics.Core.Entities;
+    using Mongo.GenericClient.Core.Attributes;
+    using Mongo.GenericClient.Core.Entities;
     using MongoDB.Bson;
 
     [CollectionName("persons")]

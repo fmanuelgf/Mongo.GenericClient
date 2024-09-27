@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mongo.GenericClient", "Mongo.GenericClient\Mongo.GenericClient.csproj", "{91FAE1F8-966F-4649-A272-457EB94BA595}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mongo.GenericClient.Tests", "Mongo.GenericClient.Tests\Mongo.GenericClient.Tests.csproj", "{EE28A32B-0AAD-410A-976A-F729DC896D7F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{91FAE1F8-966F-4649-A272-457EB94BA595}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91FAE1F8-966F-4649-A272-457EB94BA595}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91FAE1F8-966F-4649-A272-457EB94BA595}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91FAE1F8-966F-4649-A272-457EB94BA595}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE28A32B-0AAD-410A-976A-F729DC896D7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE28A32B-0AAD-410A-976A-F729DC896D7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE28A32B-0AAD-410A-976A-F729DC896D7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE28A32B-0AAD-410A-976A-F729DC896D7F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

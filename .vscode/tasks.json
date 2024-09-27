@@ -14,7 +14,7 @@
         {
             "label": "run dotnet-nuget-push",
             "type": "shell",
-            "command": "dotnet nuget push src/package/Mongo.Generics.${input:nupkg-version}.nupkg --api-key ${input:nupkg-key} --source https://api.nuget.org/v3/index.json",
+            "command": "dotnet nuget push src/package/Mongo.GenericClient.${input:nupkg-version}.nupkg --api-key ${input:nupkg-key} --source https://api.nuget.org/v3/index.json",
             "group": {
                 "kind": "build",
                 "isDefault": true
