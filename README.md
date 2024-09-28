@@ -94,9 +94,11 @@ namespace Mongo.GenericClient.Core.Entities
 
 ## Usage
 
-Defining an entity and its collection name:
+__Defining an entity and its collection name:__
 
-_The class must implement `IEntity` and have the attribute `CollectionName`_
+The class must implement `IEntity` and have the attribute `CollectionName`
+
+_Example:_
 ```C#
 namespace Mongo.GenericClient.Tests.SetUp
 {
@@ -116,23 +118,48 @@ namespace Mongo.GenericClient.Tests.SetUp
 }
 ```
 
-Creating a collection (or just inserting data)
+__Creating a collection (or just inserting data)__
 
-_Using the repository_
+Using the repository
+
+_Example:_
 ```C#
 await this.repository.Collection.InsertOneAsync(entity);
 ```
 
-_Using the service_
+Using the service
+
+_Example:_
 ```C#
 await this.writeService.CreateAsync(entity);
 ```
 
 Getting a list of documents as entities
 
+_Example:_
 ```C#
 var allEntities = this.readService.GetAll()
 var filteredEntities = this.readService.GetAll(x => x.Age == 30)
+````
+
+
+__Namespace `Mongo.GenericClient.DependencyInjection`__
+
+Some extension methods have been added to facilitate the registration of repositories and services.
+
+- Services and Repository separately:
+
+_Example:_
+```C#
+services.ResisterGenericRepository<PersonEntity>(RegisterMode.Transient);
+services.ResisterGenericServices<PersonEntity>(RegisterMode.Transient);
+```
+
+- Services and repository at the same time:
+
+_Example:_
+```C#
+services.ResisterGenericRepositoryAndServices<PersonEntity>(RegisterMode.Transient);
 ````
 
 

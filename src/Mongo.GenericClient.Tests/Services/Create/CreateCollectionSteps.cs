@@ -9,7 +9,6 @@ namespace Mongo.GenericClient.Tests.Services.Create
         private readonly CreateCollectionScenario scenario;
 
         public CreateCollectionSteps(CreateCollectionScenario scenario)
-            : base()
         {
             this.scenario = scenario;
         }

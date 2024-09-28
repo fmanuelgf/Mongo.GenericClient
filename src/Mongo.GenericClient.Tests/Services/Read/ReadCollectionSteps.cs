@@ -9,7 +9,6 @@ namespace Mongo.GenericClient.Tests.Services.Read
         private readonly ReadCollectionScenario scenario;
 
         public ReadCollectionSteps(ReadCollectionScenario scenario)
-            : base()
         {
             this.scenario = scenario;
         }

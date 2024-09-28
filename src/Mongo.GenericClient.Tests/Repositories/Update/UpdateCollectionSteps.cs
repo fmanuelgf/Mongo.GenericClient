@@ -9,7 +9,6 @@ namespace Mongo.GenericClient.Tests.Repositories.Update
         private readonly UpdateCollectionScenario scenario;
 
         public UpdateCollectionSteps(UpdateCollectionScenario scenario)
-            : base()
         {
             this.scenario = scenario;
         }

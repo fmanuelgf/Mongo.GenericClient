@@ -17,15 +17,17 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/fmanuelgf/Mongo.GenericClient</RepositoryUrl> 
     <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>$([System.IO.File]::ReadAllText("CHANGELOG.md"))</PackageReleaseNotes>
+    <PackageReleaseNotes>CHANGELOG.md</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="$(MongoDB-Driver)" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="$(Microsoft-Extensions-DependencyInjection)" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+    <None Include="..\CHANGELOG.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
 </Project>

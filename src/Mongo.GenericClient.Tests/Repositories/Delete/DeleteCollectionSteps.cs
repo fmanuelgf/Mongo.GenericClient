@@ -9,7 +9,6 @@ namespace Mongo.GenericClient.Tests.Repositories.Delete
         private readonly DeleteCollectionScenario scenario;
 
         public DeleteCollectionSteps(DeleteCollectionScenario scenario)
-            : base()
         {
             this.scenario = scenario;
         }

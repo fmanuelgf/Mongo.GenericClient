@@ -4,12 +4,11 @@ namespace Mongo.GenericClient.Tests.Repositories.Create
 
     [Binding]
     [Scope(Feature = "Create a Collection - Repository")]
-    public class CreateCollectionSteps 
+    public class CreateCollectionSteps
     {
         private readonly CreateCollectionScenario scenario;
 
         public CreateCollectionSteps(CreateCollectionScenario scenario)
-            : base()
         {
             this.scenario = scenario;
         }

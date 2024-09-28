@@ -4,8 +4,7 @@ namespace Mongo.GenericClient.Tests.Base
     using Mongo.GenericClient.Core.Entities;
     using Mongo.GenericClient.Core.Repositories;
     using Mongo.GenericClient.Core.Services;
-    using Mongo.GenericClient.Repositories;
-    using Mongo.GenericClient.Services;
+    using Mongo.GenericClient.Tests.IoC;
     using Mongo.GenericClient.Tests.SetUp;
     using MongoDB.Driver;
 
@@ -21,10 +20,11 @@ namespace Mongo.GenericClient.Tests.Base
         public ScenarioBase()
         {
             TestConfig.Configure();
-
-            this.Repository = new GenericRepository<TEntity>();
-            this.ReadService = new ReadService<TEntity>(this.Repository);
-            this.WriteService = new WriteService<TEntity>(this.Repository);
+            Dependencies.Configure();
+            
+            this.Repository = Dependencies.GetRequiredService<IGenericRepository<TEntity>>();
+            this.ReadService = Dependencies.GetRequiredService<IReadService<TEntity>>();
+            this.WriteService = Dependencies.GetRequiredService<IWriteService<TEntity>>();
         }
 
         public void ClearDatabase()

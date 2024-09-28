@@ -52,7 +52,8 @@ namespace Mongo.GenericClient.Tests.Repositories.Update
 
         public async Task CheckTheEntityIsUpdatedAsync(string field, string value)
         {
-            var entity = await this.ReadService.GetByIdAsync(this.personToUpdate.Id);
+            var query = await this.Repository.Collection.FindAsync(x => x.Id ==this.personToUpdate.Id);
+            var entity = query.FirstOrDefault();
             switch (field)
             {
                 case "Name":
