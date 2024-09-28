@@ -17,7 +17,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/fmanuelgf/Mongo.GenericClient</RepositoryUrl> 
     <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>https://github.com/fmanuelgf/Mongo.GenericClient/CHANGELOG.md</PackageReleaseNotes>
+    <PackageReleaseNotes>https://github.com/fmanuelgf/Mongo.GenericClient/blob/main/CHANGELOG.md</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
