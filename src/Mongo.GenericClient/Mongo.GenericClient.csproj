@@ -17,7 +17,7 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/fmanuelgf/Mongo.GenericClient</RepositoryUrl> 
     <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>CHANGELOG.md</PackageReleaseNotes>
+    <PackageReleaseNotes>$([System.IO.File]::ReadAllText("CHANGELOG.txt"))</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,7 +27,6 @@
 
   <ItemGroup>
     <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
-    <None Include="..\CHANGELOG.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
 </Project>
