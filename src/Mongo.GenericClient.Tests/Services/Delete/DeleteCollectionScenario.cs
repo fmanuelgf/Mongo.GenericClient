@@ -21,16 +21,20 @@ namespace Mongo.GenericClient.Tests.Services.Delete
             await this.Repository.Collection.InsertManyAsync(this.personEntities);
         }
 
-        public async Task RunMethodAsync(string method)
+        public async Task RunDeleteAsyncMethodAsync(string asType)
         {
-            switch (method)
+            switch (asType)
             {
-                case "DeleteAsync":
+                case "ObjectId":
                     await this.WriteService.DeleteAsync(this.personEntities.Last().Id);
                     break;
 
+                case "string":
+                    await this.WriteService.DeleteAsync(this.personEntities.Last().Id.ToString());
+                    break;
+
                 default:
-                    throw new ArgumentException($"Unknown method {method}");
+                    throw new ArgumentException($"Unknown type {asType}");
             }
         }
 

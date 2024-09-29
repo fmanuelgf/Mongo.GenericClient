@@ -51,5 +51,15 @@ namespace Mongo.GenericClient.Services
                 .Collection
                 .DeleteOneAsync(filter);
         }
+
+        public virtual async Task DeleteAsync(string id)
+        {
+            if (!ObjectId.TryParse(id, out var objectId))
+            {
+                throw new ArgumentException($"'{id}' is not a valid ObjectId");
+            }
+            
+            await this.DeleteAsync(objectId);
+        }
     }
 }

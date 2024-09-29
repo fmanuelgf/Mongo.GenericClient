@@ -26,5 +26,11 @@ namespace Mongo.GenericClient.Core.Services
         /// </summary>
         /// <param name="id">The ID of the document to delete.</param>
         Task DeleteAsync(ObjectId id);
+
+        /// <summary>
+        /// Delete a document.
+        /// </summary>
+        /// <param name="id">The ID of the document to delete.</param>
+        Task DeleteAsync(string id);
     }
 }

@@ -1,5 +1,9 @@
 # Mongo.GenericClient
 
+## Release 8.1.5
+
+- Add method `DeleteAsync(string id)`
+
 ## Release 8.1.4
 
 - Add namespace Mongo.GenericClient.DependencyInjection

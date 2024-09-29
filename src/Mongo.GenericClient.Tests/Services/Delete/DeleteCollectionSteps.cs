@@ -21,16 +21,22 @@ namespace Mongo.GenericClient.Tests.Services.Delete
             this.scenario.ClearDatabase();
         }
 
-        [Given(@"a collection of (.*) persons exist")]
+        [Given("a collection of (.*) persons exist")]
         public async Task GivenAPersonsCollectionAsync(int number)
         {
             await this.scenario.CreatePersonCollectionAsync(number);
         }
 
-        [When("calling the (.*) method of the WriteService")]
-        public async Task WhenMethodIsCalledAsync(string method)
+        [Given("1 person has the Id xyz")]
+        public void GivenAPersonsWithId()
         {
-            await this.scenario.RunMethodAsync(method);
+            // do nothing
+        }
+
+        [When("calling the DeleteAsync xyz as (.*) method of the WriteService")]
+        public async Task WhenMethodIsCalledAsync(string asType)
+        {
+            await this.scenario.RunDeleteAsyncMethodAsync(asType);
         }
 
         [Then("the count of the collection of persons equals (.*)")]
