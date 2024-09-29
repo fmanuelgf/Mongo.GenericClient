@@ -23,6 +23,7 @@ namespace Mongo.GenericClient.Services
             this.repository = repository;
         }
 
+        /// <inheritdoc />
         public virtual IList<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter = null)
         {
             return this.repository
@@ -31,6 +32,7 @@ namespace Mongo.GenericClient.Services
                 .ToList();
         }
 
+        /// <inheritdoc />
         public virtual IMongoQueryable<TEntity> AsQueryable()
         {
             return this.repository
@@ -38,6 +40,7 @@ namespace Mongo.GenericClient.Services
                 .AsQueryable();
         }
 
+        /// <inheritdoc />
         public virtual Task<PaginationResult<TEntity>> GetPaginatedAsync(
             int pageNum,
             int pageSize)
@@ -45,6 +48,7 @@ namespace Mongo.GenericClient.Services
             return this.GetPaginatedAsync(pageNum, pageSize, null);
         }
 
+        /// <inheritdoc />
         public virtual Task<PaginationResult<TEntity>> GetPaginatedAsync(
             Expression<Func<TEntity, bool>>? filter,
             int pageNum,
@@ -53,6 +57,7 @@ namespace Mongo.GenericClient.Services
             return this.GetPaginatedAsync(pageNum, pageSize, filter);
         }
 
+        /// <inheritdoc />
         public virtual async Task<TEntity> GetByIdAsync(ObjectId id)
         {
             var filter = Builders<TEntity>
@@ -65,6 +70,7 @@ namespace Mongo.GenericClient.Services
                 .FirstOrDefaultAsync();
         }
 
+        /// <inheritdoc />
         public virtual async Task<TEntity> GetByIdAsync(string id)
         {
             if (ObjectId.TryParse(id, out var objectId))

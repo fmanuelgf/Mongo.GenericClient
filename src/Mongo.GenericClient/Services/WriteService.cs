@@ -18,6 +18,7 @@ namespace Mongo.GenericClient.Services
             this.repository = repository;
         }
 
+        /// <inheritdoc />
         public virtual async Task<TEntity> CreateAsync(TEntity entity)
         {
             entity.Id = ObjectId.GenerateNewId();
@@ -28,6 +29,7 @@ namespace Mongo.GenericClient.Services
             return entity;
         }
 
+        /// <inheritdoc />
         public virtual async Task<bool> UpdateAsync(TEntity entity)
         {
             var filter = Builders<TEntity>
@@ -41,6 +43,7 @@ namespace Mongo.GenericClient.Services
             return result.ModifiedCount == 1;
         }
 
+        /// <inheritdoc />
         public virtual async Task DeleteAsync(ObjectId id)
         {
             var filter = Builders<TEntity>
@@ -52,6 +55,7 @@ namespace Mongo.GenericClient.Services
                 .DeleteOneAsync(filter);
         }
 
+        /// <inheritdoc />
         public virtual async Task DeleteAsync(string id)
         {
             if (!ObjectId.TryParse(id, out var objectId))

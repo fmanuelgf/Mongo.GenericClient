@@ -11,17 +11,15 @@
     {
         public GenericRepository()
         {
-            var client = new MongoClient(AppConfig.ConnectionString);
-            var database = client.GetDatabase(AppConfig.DatabaseName);
-
             var collectionName =
                 Attribute.GetCustomAttribute(
                     typeof(TEntity),
                     typeof(CollectionNameAttribute)) as CollectionNameAttribute;
 
-            this.Collection = database.GetCollection<TEntity>(collectionName?.Name);
+            this.Collection = MongoHelper.Database.GetCollection<TEntity>(collectionName?.Name);
         }
 
+        /// <inheritdoc />
         public IMongoCollection<TEntity> Collection { get; private set; }
     }
 }

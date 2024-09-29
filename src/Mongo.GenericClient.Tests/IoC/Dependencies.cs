@@ -18,8 +18,8 @@ namespace Mongo.GenericClient.Tests.IoC
         public static void Configure()
         {
             services = new ServiceCollection();
-            services.ResisterGenericRepository<PersonEntity>(RegisterMode.Transient);
-            services.ResisterGenericServices<PersonEntity>(RegisterMode.Transient);
+            services.RegisterGenericRepository<PersonEntity>(RegisterMode.Transient);
+            services.RegisterGenericServices<PersonEntity>(RegisterMode.Transient);
 
             provider = services.BuildServiceProvider();
         }

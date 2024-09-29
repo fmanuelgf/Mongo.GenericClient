@@ -10,11 +10,11 @@ namespace Mongo.GenericClient.DependencyInjection
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// Register the generic IReadService and IWriteService and their implementations for the given Entity.
+        /// Register IReadService, IWriteService and their implementations for the given Entity.
         /// </summary>
         /// <typeparam name="TEntity">The <see cref="TEntity"/>.</typeparam>
         /// <param name="registerMode">The <see cref="RegisterMode"> (Transient, Scoped, Singleton).</param>
-        public static void ResisterGenericServices<TEntity>(this IServiceCollection services, RegisterMode registerMode)
+        public static void RegisterGenericServices<TEntity>(this IServiceCollection services, RegisterMode registerMode)
             where TEntity : IEntity
         {
             switch (registerMode)
@@ -37,11 +37,11 @@ namespace Mongo.GenericClient.DependencyInjection
         }
 
         /// <summary>
-        /// Register the generic IGenericRepository and its implementation for the given Entity.
+        /// Register IGenericRepository and its implementation for the given Entity.
         /// </summary>
         /// <typeparam name="TEntity">The <see cref="TEntity"/>.</typeparam>
         /// <param name="registerMode">The <see cref="RegisterMode"> (Transient, Scoped, Singleton).</param>
-        public static void ResisterGenericRepository<TEntity>(this IServiceCollection services, RegisterMode registerMode)
+        public static void RegisterGenericRepository<TEntity>(this IServiceCollection services, RegisterMode registerMode)
             where TEntity : IEntity
         {
             switch (registerMode)
@@ -61,15 +61,15 @@ namespace Mongo.GenericClient.DependencyInjection
         }
 
         /// <summary>
-        /// Register the generic IGenericRepository, IReadService and IWriteService and their implementations for the given Entity.
+        /// Register IGenericRepository, IReadService, IWriteService and their implementations for the given Entity.
         /// </summary>
         /// <typeparam name="TEntity">The <see cref="TEntity"/>.</typeparam>
         /// <param name="registerMode">The <see cref="RegisterMode"> (Transient, Scoped, Singleton).</param>
-        public static void ResisterGenericRepositoryAndServices<TEntity>(this IServiceCollection services, RegisterMode registerMode)
+        public static void RegisterGenericRepositoryAndServices<TEntity>(this IServiceCollection services, RegisterMode registerMode)
             where TEntity : IEntity
         {
-            services.ResisterGenericRepository<TEntity>(registerMode);
-            services.ResisterGenericServices<TEntity>(registerMode);
+            services.RegisterGenericRepository<TEntity>(registerMode);
+            services.RegisterGenericServices<TEntity>(registerMode);
         }
     }
 }

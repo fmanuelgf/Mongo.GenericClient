@@ -8,27 +8,27 @@ namespace Mongo.GenericClient.Core.Services
         where TEntity : IEntity
     {
         /// <summary>
-        /// Create a document.
+        /// Create a document of type <see cref="TEntity"/>.
         /// </summary>
         /// <param name="entity">The <see cref="TEntity"/>.</param>
         /// <returns>The created <see cref="TEntity"/> mapping the document.</returns>
         Task<TEntity> CreateAsync(TEntity entity);
 
         /// <summary>
-        /// Update a document.
+        /// Update a document of type <see cref="TEntity"/>.
         /// </summary>
         /// <param name="entity">The <see cref="TEntity"/> mapping the document.</param>
         /// <returns>Whether the action was successful or not.</returns>
         Task<bool> UpdateAsync(TEntity entity);
 
         /// <summary>
-        /// Delete a document.
+        /// Delete a document of type <see cref="TEntity"/>.
         /// </summary>
         /// <param name="id">The ID of the document to delete.</param>
         Task DeleteAsync(ObjectId id);
 
         /// <summary>
-        /// Delete a document.
+        /// Delete a document of type <see cref="TEntity"/>.
         /// </summary>
         /// <param name="id">The ID of the document to delete.</param>
         Task DeleteAsync(string id);

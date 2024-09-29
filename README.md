@@ -95,6 +95,25 @@ namespace Mongo.GenericClient.Core.Entities
 }
 ```
 
+MongoHelper
+
+```C#
+namespace Mongo.GenericClient
+{
+    using MongoDB.Driver;
+
+    public static class MongoHelper
+    {
+        private static readonly MongoClient client = new MongoClient(AppConfig.ConnectionString);
+        private static readonly IMongoDatabase database = client.GetDatabase(AppConfig.DatabaseName);
+
+        public static MongoClient Client => client;
+        
+        public static IMongoDatabase Database => database;
+    }
+}
+```
+
 ## Usage
 
 Defining an entity and its collection name
@@ -148,14 +167,14 @@ Some extension methods have been added to facilitate the registration of reposit
 > Services and Repository separately:
 
 ```C#
-services.ResisterGenericRepository<PersonEntity>(RegisterMode.Transient);
-services.ResisterGenericServices<PersonEntity>(RegisterMode.Transient);
+services.RegisterGenericRepository<PersonEntity>(RegisterMode.Transient);
+services.RegisterGenericServices<PersonEntity>(RegisterMode.Transient);
 ```
 
 > Services and repository at the same time:
 
 ```C#
-services.ResisterGenericRepositoryAndServices<PersonEntity>(RegisterMode.Transient);
+services.RegisterGenericRepositoryAndServices<PersonEntity>(RegisterMode.Transient);
 ````
 
 ## Note
