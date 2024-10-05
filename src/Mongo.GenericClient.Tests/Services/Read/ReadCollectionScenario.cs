@@ -13,6 +13,8 @@ namespace Mongo.GenericClient.Tests.Services.Read
         private IList<PersonEntity> personEntities;
         private IMongoQueryable<PersonEntity>? query;
         private ObjectId objectId;
+        
+        public ArgumentException? ExpectedExcepion { get; set; }
 
         public ReadCollectionScenario()
             : base()
@@ -65,6 +67,12 @@ namespace Mongo.GenericClient.Tests.Services.Read
                         ? await this.ReadService.GetByIdAsync(this.objectId.ToString())
                         : await this.ReadService.GetByIdAsync(this.objectId);
                     this.personEntities.Add(person);
+                    break;
+
+                case "GetByIdAsync foo":
+                    this.ExpectedExcepion = Assert.ThrowsAsync<ArgumentException>(async () =>
+                        await this.ReadService.GetByIdAsync("foo")
+                    );
                     break;
 
                 default:

@@ -6,16 +6,15 @@ namespace Mongo.GenericClient.Tests.Base
     using Mongo.GenericClient.Core.Services;
     using Mongo.GenericClient.Tests.IoC;
     using Mongo.GenericClient.Tests.SetUp;
-    using MongoDB.Driver;
 
     public abstract class ScenarioBase<TEntity> : IDisposable
         where TEntity : IEntity
     {
-        protected IGenericRepository<TEntity> Repository { get; set; }
+        public IGenericRepository<TEntity> Repository { get; set; }
         
-        protected IReadService<TEntity> ReadService { get; set; }
+        public IReadService<TEntity> ReadService { get; set; }
         
-        protected IWriteService<TEntity> WriteService { get; set; }
+        public IWriteService<TEntity> WriteService { get; set; }
 
         public ScenarioBase()
         {
@@ -29,8 +28,7 @@ namespace Mongo.GenericClient.Tests.Base
 
         public void ClearDatabase()
         {
-            var client = new MongoClient(AppConfig.ConnectionString);
-            client.DropDatabase(AppConfig.DatabaseName);
+            MongoHelper.Client.DropDatabase(AppConfig.DatabaseName);
         }
 
         public void Dispose()

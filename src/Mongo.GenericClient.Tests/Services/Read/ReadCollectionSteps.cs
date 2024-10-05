@@ -57,6 +57,12 @@ namespace Mongo.GenericClient.Tests.Services.Read
             await this.scenario.RunMethod("GetByIdAsync", asType);
         }
 
+        [When("calling the GetByIdAsync foo method of the ReadService")]
+        public async Task WhenGetByIdMethodIsCalledAsync()
+        {
+            await this.scenario.RunMethod("GetByIdAsync foo");
+        }
+
         [When(@"calling the GetAll method of the ReadService with (.*) filter")]
         public async Task WhenMethodIsCalledAsync(string filter)
         {
@@ -94,6 +100,21 @@ namespace Mongo.GenericClient.Tests.Services.Read
         {
             var number = howMany == "the" ? 1 : int.Parse(howMany);
             this.scenario.CheckPersonEntitiesName(number, name);
+        }
+
+        [Then("an Exception is thrown")]
+        public void ThenTheExpectedErrorIsThrown()
+        {
+            Assert.That(this.scenario.ExpectedExcepion, Is.Not.Null);
+        }
+
+        [Then("the Exception message is 'foo is not a valid ObjectId'")]
+        public void ThenTheExpectedErrorMessageIs()
+        {
+            Assert.That(
+                this.scenario.ExpectedExcepion?.Message,
+                Is.EqualTo("'foo' is not a valid ObjectId")
+            );
         }
     }
 }

@@ -51,3 +51,10 @@ Scenario Outline: Can GetById
         | argType  | 
         | ObjectId | 
         | string   | 
+
+Scenario Outline: Cannot GetById - Invalid Id or Name
+    Given a ReadService of PersonEntity
+    And a collection of 50 persons exist
+    When calling the GetByIdAsync foo method of the ReadService
+    Then an Exception is thrown
+    And the Exception message is 'foo is not a valid ObjectId'

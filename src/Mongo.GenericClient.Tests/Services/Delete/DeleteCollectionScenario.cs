@@ -8,6 +8,8 @@ namespace Mongo.GenericClient.Tests.Services.Delete
     public class DeleteCollectionScenario : ScenarioBase<PersonEntity>
     {
         private List<PersonEntity> personEntities;
+        
+        public ArgumentException? ExpectedExcepion { get; set; }
 
         public DeleteCollectionScenario()
             : base()
