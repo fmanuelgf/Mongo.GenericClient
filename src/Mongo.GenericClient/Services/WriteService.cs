@@ -2,7 +2,6 @@ namespace Mongo.GenericClient.Services
 {
     using System.Threading.Tasks;
     using Mongo.GenericClient.Core.Entities;
-    using Mongo.GenericClient.Core.Repositories;
     using Mongo.GenericClient.Core.Services;
     using MongoDB.Bson;
     using MongoDB.Driver;
@@ -10,20 +9,18 @@ namespace Mongo.GenericClient.Services
     public class WriteService<TEntity> : IWriteService<TEntity>
         where TEntity : IEntity
     {
-        private readonly IGenericRepository<TEntity> repository;
+        private readonly IMongoCollection<TEntity> collection;
 
-        public WriteService(
-            IGenericRepository<TEntity> repository)
+        public WriteService()
         {
-            this.repository = repository;
+            this.collection = MongoHelper.GetCollection<TEntity>();
         }
 
         /// <inheritdoc />
         public virtual async Task<TEntity> CreateAsync(TEntity entity)
         {
             entity.Id = ObjectId.GenerateNewId();
-            await this.repository
-                .Collection
+            await this.collection
                 .InsertOneAsync(entity);
 
             return entity;
@@ -36,8 +33,7 @@ namespace Mongo.GenericClient.Services
                 .Filter
                 .Eq(x => x.Id, entity.Id);
 
-            var result = await this.repository
-                .Collection
+            var result = await this.collection
                 .ReplaceOneAsync(filter, entity);
 
             return result.ModifiedCount == 1;
@@ -50,8 +46,7 @@ namespace Mongo.GenericClient.Services
                 .Filter
                 .Eq(x => x.Id, id);
 
-            var result = await this.repository
-                .Collection
+            var result = await this.collection
                 .DeleteOneAsync(filter);
         }
 
