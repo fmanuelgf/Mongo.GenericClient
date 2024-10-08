@@ -1,4 +1,4 @@
-namespace Mongo.GenericClient.Tests.SetUp
+namespace Mongo.GenericClient.Tests.Setup
 {
     using System;
 

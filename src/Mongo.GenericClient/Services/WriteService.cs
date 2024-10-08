@@ -1,6 +1,7 @@
 namespace Mongo.GenericClient.Services
 {
     using System.Threading.Tasks;
+    using Mongo.GenericClient.Core;
     using Mongo.GenericClient.Core.Entities;
     using Mongo.GenericClient.Core.Services;
     using MongoDB.Bson;
@@ -11,9 +12,9 @@ namespace Mongo.GenericClient.Services
     {
         private readonly IMongoCollection<TEntity> collection;
 
-        public WriteService()
+        public WriteService(IMongoContext context)
         {
-            this.collection = MongoHelper.GetCollection<TEntity>();
+            this.collection = context.GetCollection<TEntity>();
         }
 
         /// <inheritdoc />

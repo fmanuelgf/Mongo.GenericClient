@@ -4,6 +4,7 @@ namespace Mongo.GenericClient.Services
     using System.Linq;
     using System.Linq.Expressions;
     using System.Threading.Tasks;
+    using Mongo.GenericClient.Core;
     using Mongo.GenericClient.Core.Entities;
     using Mongo.GenericClient.Core.Services;
     using Mongo.GenericClient.Models;
@@ -16,9 +17,9 @@ namespace Mongo.GenericClient.Services
     {
         private readonly IMongoCollection<TEntity> collection;
 
-        public ReadService()
+        public ReadService(IMongoContext context)
         {
-            this.collection = MongoHelper.GetCollection<TEntity>();
+            this.collection = context.GetCollection<TEntity>();
         }
 
         /// <inheritdoc />
