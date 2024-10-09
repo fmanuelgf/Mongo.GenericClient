@@ -97,6 +97,8 @@ namespace Mongo.GenericClient.Core
 
 ## MongoHelper
 
+>Note: Auxiliary helper not required for general use.
+
 ```C#
 namespace Mongo.GenericClient
 {
@@ -112,6 +114,21 @@ namespace Mongo.GenericClient
 ```
 
 ## Usage
+
+First, register `IMongoContext` and the services for all the entities to be used.
+
+```C#
+using Mongo.GenericClient.DependencyInjection;
+...
+
+// IMongoContext
+services.RegisterMongoContext(RegisterMode.Singleton);
+
+// Services
+services.RegisterGenericServices<PersonEntity>(RegisterMode.Transient);
+
+...
+```
 
 Defining an entity and its collection name
 
@@ -156,22 +173,6 @@ Getting a list of documents as entities
 var allEntities = this.readService.GetAll()
 var filteredEntities = this.readService.GetAll(x => x.Age == 30)
 ````
-
-## Namespace `Mongo.GenericClient.DependencyInjection`
-
-Some extension methods have been added to facilitate the registration of IMongoContext and services.
-
-> IMongoContext:
-
-```C#
-services.RegisterMongoContext(RegisterMode.Singleton);
-```
-
-> Services:
-
-```C#
-services.RegisterGenericServices<PersonEntity>(RegisterMode.Transient);
-```
 
 ## Note
 

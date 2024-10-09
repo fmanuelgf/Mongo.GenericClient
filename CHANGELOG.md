@@ -1,5 +1,13 @@
 # Mongo.GenericClient
 
+## Release 8.1.7
+
+- Add `IMongoContext` to manage the collections.
+- Add the `RegisterMongoContext` extension method.
+- Mark `IGenericRepository` as `Obsolete`.
+- Mark the `RegisterGenericRepository` extension method as `Obsolete`.
+- Mark the `RegisterGenericRepositoryAndServices` extension method as `Obsolete`.
+
 ## Release 8.1.6
 
 - Add static class `MongoHelper`, providing access to `MongoClient` and `IMongoDatabase`
