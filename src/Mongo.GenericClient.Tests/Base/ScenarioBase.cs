@@ -10,11 +10,11 @@ namespace Mongo.GenericClient.Tests.Base
     public abstract class ScenarioBase<TEntity> : IDisposable
         where TEntity : IEntity
     {
-        protected IMongoCollection<TEntity> Collection { get; set; }
+        public IMongoCollection<TEntity> Collection { get; set; }
         
-        protected IReadService<TEntity> ReadService { get; set; }
+        public IReadService<TEntity> ReadService { get; set; }
         
-        protected IWriteService<TEntity> WriteService { get; set; }
+        public IWriteService<TEntity> WriteService { get; set; }
 
         public ScenarioBase()
         {
