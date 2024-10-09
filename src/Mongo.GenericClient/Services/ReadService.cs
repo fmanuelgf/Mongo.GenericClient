@@ -4,8 +4,8 @@ namespace Mongo.GenericClient.Services
     using System.Linq;
     using System.Linq.Expressions;
     using System.Threading.Tasks;
+    using Mongo.GenericClient.Core;
     using Mongo.GenericClient.Core.Entities;
-    using Mongo.GenericClient.Core.Repositories;
     using Mongo.GenericClient.Core.Services;
     using Mongo.GenericClient.Models;
     using MongoDB.Bson;
@@ -15,19 +15,17 @@ namespace Mongo.GenericClient.Services
     public class ReadService<TEntity> : IReadService<TEntity>
         where TEntity : IEntity
     {
-        private readonly IGenericRepository<TEntity> repository;
+        private readonly IMongoCollection<TEntity> collection;
 
-        public ReadService(
-            IGenericRepository<TEntity> repository)
+        public ReadService(IMongoContext context)
         {
-            this.repository = repository;
+            this.collection = context.GetCollection<TEntity>();
         }
 
         /// <inheritdoc />
         public virtual IList<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter = null)
         {
-            return this.repository
-                .Collection
+            return this.collection
                 .Find(filter ?? Builders<TEntity>.Filter.Empty)
                 .ToList();
         }
@@ -35,8 +33,7 @@ namespace Mongo.GenericClient.Services
         /// <inheritdoc />
         public virtual IMongoQueryable<TEntity> AsQueryable()
         {
-            return this.repository
-                .Collection
+            return this.collection
                 .AsQueryable();
         }
 
@@ -64,8 +61,7 @@ namespace Mongo.GenericClient.Services
                 .Filter
                 .Eq(x => x.Id, id);
 
-            return await this.repository
-                .Collection
+            return await this.collection
                 .Find(filter)
                 .FirstOrDefaultAsync();
         }
@@ -97,12 +93,10 @@ namespace Mongo.GenericClient.Services
             }
 
             var query = filter ?? Builders<TEntity>.Filter.Empty;
-            var totalCount = this.repository
-                .Collection
+            var totalCount = this.collection
                 .CountDocuments(query);
 
-            var entities = await this.repository
-                .Collection
+            var entities = await this.collection
                 .Find(query)
                 .Skip((pageNum - 1) * pageSize)
                 .Limit(pageSize)

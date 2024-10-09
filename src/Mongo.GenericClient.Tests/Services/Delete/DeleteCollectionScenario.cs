@@ -2,7 +2,7 @@ namespace Mongo.GenericClient.Tests.Services.Delete
 {
     using System.Collections.Generic;
     using Mongo.GenericClient.Tests.Base;
-    using Mongo.GenericClient.Tests.SetUp;
+    using Mongo.GenericClient.Tests.Setup;
     using MongoDB.Driver;
 
     public class DeleteCollectionScenario : ScenarioBase<PersonEntity>
@@ -20,7 +20,7 @@ namespace Mongo.GenericClient.Tests.Services.Delete
         public async Task CreatePersonCollectionAsync(int number)
         {
             this.personEntities = DataFactory.BuildRandomPersonsList(number);
-            await this.Repository.Collection.InsertManyAsync(this.personEntities);
+            await this.Collection.InsertManyAsync(this.personEntities);
         }
 
         public async Task RunDeleteAsyncMethodAsync(string asType)
@@ -43,7 +43,7 @@ namespace Mongo.GenericClient.Tests.Services.Delete
         public void CheckCollectionCount(int expectedCount)
         {
             Assert.That(
-                this.Repository.Collection.CountDocuments(Builders<PersonEntity>.Filter.Empty),
+                this.Collection.CountDocuments(Builders<PersonEntity>.Filter.Empty),
                 Is.EqualTo(expectedCount)
             );
         }

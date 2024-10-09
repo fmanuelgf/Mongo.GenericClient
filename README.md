@@ -10,22 +10,6 @@ Generic library to manage a [MongoDB](https://www.mongodb.com) database.
 
 ## Interfaces
 
-Reposirory
-
-```C#
-namespace Mongo.GenericClient.Core.Repositories
-{
-    using Mongo.GenericClient.Core.Entities;
-    using MongoDB.Driver;
-
-    public interface IGenericRepository<TEntity>
-        where TEntity : IEntity
-    {
-        IMongoCollection<TEntity> Collection { get; }
-    }
-}
-```
-
 Services
 
 ```C#
@@ -95,7 +79,25 @@ namespace Mongo.GenericClient.Core.Entities
 }
 ```
 
-MongoHelper
+IMongoContext
+
+```C#
+namespace Mongo.GenericClient.Core
+{
+    using Mongo.GenericClient.Core.Entities;
+    using MongoDB.Driver;
+
+    public interface IMongoContext
+    {
+        IMongoCollection<TEntity> GetCollection<TEntity>()
+            where TEntity : IEntity;
+    }
+}
+````
+
+## MongoHelper
+
+>Note: Auxiliary helper not required for general use.
 
 ```C#
 namespace Mongo.GenericClient
@@ -104,24 +106,36 @@ namespace Mongo.GenericClient
 
     public static class MongoHelper
     {
-        private static readonly MongoClient client = new MongoClient(AppConfig.ConnectionString);
-        private static readonly IMongoDatabase database = client.GetDatabase(AppConfig.DatabaseName);
-
-        public static MongoClient Client => client;
+        public static MongoClient Client => new MongoClient(AppConfig.ConnectionString);
         
-        public static IMongoDatabase Database => database;
+        public static IMongoDatabase Database => Client.GetDatabase(AppConfig.DatabaseName);
     }
 }
 ```
 
 ## Usage
 
+First, register `IMongoContext` and the services for all the entities to be used.
+
+```C#
+using Mongo.GenericClient.DependencyInjection;
+...
+
+// IMongoContext
+services.RegisterMongoContext(RegisterMode.Singleton);
+
+// Services
+services.RegisterGenericServices<PersonEntity>(RegisterMode.Transient);
+
+...
+```
+
 Defining an entity and its collection name
 
 > The class must implement `IEntity` and have the attribute `CollectionName`
 
 ```C#
-namespace Mongo.GenericClient.Tests.SetUp
+namespace Mongo.GenericClient.Tests.Setup
 {
     using Mongo.GenericClient.Core.Attributes;
     using Mongo.GenericClient.Core.Entities;
@@ -141,10 +155,10 @@ namespace Mongo.GenericClient.Tests.SetUp
 
 Creating a collection (or just inserting data)
 
-> Using the repository
+> Using IMongoContext
 
 ```C#
-await this.repository.Collection.InsertOneAsync(entity);
+await this.mongoContext.GetCollection<PersonEntity>().InsertOneAsync(entity);
 ```
 
 > Using the service
@@ -158,23 +172,6 @@ Getting a list of documents as entities
 ```C#
 var allEntities = this.readService.GetAll()
 var filteredEntities = this.readService.GetAll(x => x.Age == 30)
-````
-
-## Namespace `Mongo.GenericClient.DependencyInjection`
-
-Some extension methods have been added to facilitate the registration of repositories and services.
-
-> Services and Repository separately:
-
-```C#
-services.RegisterGenericRepository<PersonEntity>(RegisterMode.Transient);
-services.RegisterGenericServices<PersonEntity>(RegisterMode.Transient);
-```
-
-> Services and repository at the same time:
-
-```C#
-services.RegisterGenericRepositoryAndServices<PersonEntity>(RegisterMode.Transient);
 ````
 
 ## Note

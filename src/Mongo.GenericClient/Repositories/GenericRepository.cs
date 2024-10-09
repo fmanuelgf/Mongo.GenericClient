@@ -6,6 +6,7 @@
     using Mongo.GenericClient.Core.Repositories;
     using MongoDB.Driver;
 
+    [Obsolete("Use IMongoContext instead as this class will be removed.")]
     public class GenericRepository<TEntity> : IGenericRepository<TEntity>
         where TEntity : IEntity
     {
@@ -20,6 +21,7 @@
         }
 
         /// <inheritdoc />
+        [Obsolete("Use IMongoContext.GetCollection<TEntity>() instead as this class will be removed.")]
         public IMongoCollection<TEntity> Collection { get; private set; }
     }
 }

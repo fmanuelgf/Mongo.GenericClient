@@ -1,7 +1,7 @@
 namespace Mongo.GenericClient.Tests.Services.Create
 {
     using Mongo.GenericClient.Tests.Base;
-    using Mongo.GenericClient.Tests.SetUp;
+    using Mongo.GenericClient.Tests.Setup;
     using MongoDB.Driver;
 
     public class CreateCollectionScenario : ScenarioBase<PersonEntity>
@@ -35,7 +35,7 @@ namespace Mongo.GenericClient.Tests.Services.Create
         public void CheckCollectionIsCreated()
         {
             Assert.That(
-                this.Repository.Collection.CountDocuments(Builders<PersonEntity>.Filter.Empty),
+                this.Collection.CountDocuments(Builders<PersonEntity>.Filter.Empty),
                 Is.GreaterThan(0)
             );
         }
@@ -43,7 +43,7 @@ namespace Mongo.GenericClient.Tests.Services.Create
         public void CheckCollectionCount(int expectedCount)
         {
             Assert.That(
-                this.Repository.Collection.CountDocuments(Builders<PersonEntity>.Filter.Empty),
+                this.Collection.CountDocuments(Builders<PersonEntity>.Filter.Empty),
                 Is.EqualTo(expectedCount)
             );
         }

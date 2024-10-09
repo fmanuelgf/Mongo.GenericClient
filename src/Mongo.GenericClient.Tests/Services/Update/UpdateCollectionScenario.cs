@@ -1,7 +1,7 @@
 namespace Mongo.GenericClient.Tests.Services.Update
 {
     using Mongo.GenericClient.Tests.Base;
-    using Mongo.GenericClient.Tests.SetUp;
+    using Mongo.GenericClient.Tests.Setup;
 
     public class UpdateCollectionScenario : ScenarioBase<PersonEntity>
     {
@@ -15,7 +15,7 @@ namespace Mongo.GenericClient.Tests.Services.Update
 
         public async Task CreatePersonCollectionAsync()
         {
-            await this.Repository.Collection.InsertOneAsync(this.personToUpdate);
+            await this.Collection.InsertOneAsync(this.personToUpdate);
         }
 
         public void ModifyPersonEntity(string field, string value)

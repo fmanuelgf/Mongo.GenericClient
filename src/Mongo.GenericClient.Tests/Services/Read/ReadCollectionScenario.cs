@@ -2,7 +2,7 @@ namespace Mongo.GenericClient.Tests.Services.Read
 {
     using Mongo.GenericClient.Models;
     using Mongo.GenericClient.Tests.Base;
-    using Mongo.GenericClient.Tests.SetUp;
+    using Mongo.GenericClient.Tests.Setup;
     using MongoDB.Bson;
     using MongoDB.Driver;
     using MongoDB.Driver.Linq;
@@ -25,12 +25,12 @@ namespace Mongo.GenericClient.Tests.Services.Read
         public async Task CreatePersonCollectionAsync(int number)
         {
             var entities = DataFactory.BuildRandomPersonsList(number);
-            await this.Repository.Collection.InsertManyAsync(entities);
+            await this.Collection.InsertManyAsync(entities);
         }
 
         public async Task UpdatePersonsName(int number, string name)
         {
-            var entities = this.Repository.Collection
+            var entities = this.Collection
                 .AsQueryable()
                 .Take(number)
                 .ToList();
@@ -44,7 +44,7 @@ namespace Mongo.GenericClient.Tests.Services.Read
             {
                 var filter = Builders<PersonEntity>.Filter.Eq(x => x.Id, entity.Id);
                 entity.Name = name;
-                await this.Repository.Collection.ReplaceOneAsync(filter, entity);
+                await this.Collection.ReplaceOneAsync(filter, entity);
             }
         }
 

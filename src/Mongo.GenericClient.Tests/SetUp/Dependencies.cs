@@ -1,9 +1,8 @@
-namespace Mongo.GenericClient.Tests.IoC
+namespace Mongo.GenericClient.Tests.Setup
 {
     using System;
     using Microsoft.Extensions.DependencyInjection;
     using Mongo.GenericClient.DependencyInjection;
-    using Mongo.GenericClient.Tests.SetUp;
 
     public static class Dependencies
     {
@@ -18,7 +17,7 @@ namespace Mongo.GenericClient.Tests.IoC
         public static void Configure()
         {
             services = new ServiceCollection();
-            services.RegisterGenericRepository<PersonEntity>(RegisterMode.Transient);
+            services.RegisterMongoContext(RegisterMode.Singleton);
             services.RegisterGenericServices<PersonEntity>(RegisterMode.Transient);
 
             provider = services.BuildServiceProvider();
