@@ -134,7 +134,7 @@ services.RegisterAllGenericServices(RegisterMode.Scoped);
 
 Defining an entity and its collection name
 
-> The class must implement `IEntity` and have the attribute `CollectionName`
+> The class must implement `IEntity` and have the attribute `CollectionName`.
 
 ```csharp
 namespace Mongo.GenericClient.Tests.Setup
@@ -172,8 +172,8 @@ await this.writeService.CreateAsync(entity);
 Getting a list of documents as entities
 
 ```csharp
-var allEntities = this.readService.GetAll()
-var filteredEntities = this.readService.GetAll(x => x.Age == 30)
+var allEntities = this.readService.GetAll();
+var filteredEntities = this.readService.GetAll(x => x.Age == 30);
 ````
 
 ## Note
