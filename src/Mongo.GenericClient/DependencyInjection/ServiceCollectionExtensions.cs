@@ -63,6 +63,33 @@ namespace Mongo.GenericClient.DependencyInjection
         }
 
         /// <summary>
+        /// Register IReadService, IWriteService and their implementations for all the Entities.
+        /// </summary>
+        /// <param name="registerMode">The <see cref="RegisterMode"> (Transient, Scoped, Singleton).</param>
+        public static void RegisterAllGenericServices(
+            this IServiceCollection services,
+            RegisterMode registerMode = RegisterMode.Singleton)
+        {
+            switch (registerMode)
+            {
+                case RegisterMode.Transient:
+                    services.AddTransient(typeof(IReadService<>), typeof(ReadService<>));
+                    services.AddTransient(typeof(IWriteService<>), typeof(WriteService<>));
+                    break;
+
+                case RegisterMode.Scoped:
+                    services.AddScoped(typeof(IReadService<>), typeof(ReadService<>));
+                    services.AddScoped(typeof(IWriteService<>), typeof(WriteService<>));
+                    break;
+
+                default:
+                    services.AddSingleton(typeof(IReadService<>), typeof(ReadService<>));
+                    services.AddSingleton(typeof(IWriteService<>), typeof(WriteService<>));
+                    break;
+            }
+        }
+
+        /// <summary>
         /// Register IGenericRepository and its implementation for the given Entity.
         /// </summary>
         /// <typeparam name="TEntity">The <see cref="TEntity"/>.</typeparam>

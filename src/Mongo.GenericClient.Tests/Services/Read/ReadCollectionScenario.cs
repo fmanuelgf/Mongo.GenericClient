@@ -2,7 +2,7 @@ namespace Mongo.GenericClient.Tests.Services.Read
 {
     using Mongo.GenericClient.Models;
     using Mongo.GenericClient.Tests.Base;
-    using Mongo.GenericClient.Tests.Setup;
+    using Mongo.GenericClient.Tests.Setup.TestData;
     using MongoDB.Bson;
     using MongoDB.Driver;
     using MongoDB.Driver.Linq;

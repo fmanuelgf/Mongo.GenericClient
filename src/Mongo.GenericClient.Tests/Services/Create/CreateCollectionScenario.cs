@@ -1,7 +1,7 @@
 namespace Mongo.GenericClient.Tests.Services.Create
 {
     using Mongo.GenericClient.Tests.Base;
-    using Mongo.GenericClient.Tests.Setup;
+    using Mongo.GenericClient.Tests.Setup.TestData;
     using MongoDB.Driver;
 
     public class CreateCollectionScenario : ScenarioBase<PersonEntity>

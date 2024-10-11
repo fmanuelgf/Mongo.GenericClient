@@ -1,4 +1,4 @@
-namespace Mongo.GenericClient.Tests.Setup
+namespace Mongo.GenericClient.Tests.Setup.TestData
 {
     using MongoDB.Bson;
 

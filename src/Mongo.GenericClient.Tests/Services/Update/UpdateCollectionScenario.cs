@@ -1,7 +1,7 @@
 namespace Mongo.GenericClient.Tests.Services.Update
 {
     using Mongo.GenericClient.Tests.Base;
-    using Mongo.GenericClient.Tests.Setup;
+    using Mongo.GenericClient.Tests.Setup.TestData;
 
     public class UpdateCollectionScenario : ScenarioBase<PersonEntity>
     {

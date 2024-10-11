@@ -12,7 +12,7 @@ Generic library to manage a [MongoDB](https://www.mongodb.com) database.
 
 Services
 
-```C#
+```csharp
 namespace Mongo.GenericClient.Core.Services
 {
     using System.Collections.Generic;
@@ -44,7 +44,7 @@ namespace Mongo.GenericClient.Core.Services
 }
 ```
 
-```C#
+```csharp
 namespace Mongo.GenericClient.Core.Services
 {
     using System.Threading.Tasks;
@@ -67,7 +67,7 @@ namespace Mongo.GenericClient.Core.Services
 
 IEntity
 
-```C#
+```csharp
 namespace Mongo.GenericClient.Core.Entities
 {
     using MongoDB.Bson;
@@ -81,7 +81,7 @@ namespace Mongo.GenericClient.Core.Entities
 
 IMongoContext
 
-```C#
+```csharp
 namespace Mongo.GenericClient.Core
 {
     using Mongo.GenericClient.Core.Entities;
@@ -99,7 +99,7 @@ namespace Mongo.GenericClient.Core
 
 >Note: Auxiliary helper not required for general use.
 
-```C#
+```csharp
 namespace Mongo.GenericClient
 {
     using MongoDB.Driver;
@@ -117,24 +117,26 @@ namespace Mongo.GenericClient
 
 First, register `IMongoContext` and the services for all the entities to be used.
 
-```C#
+```csharp
 using Mongo.GenericClient.DependencyInjection;
-...
 
 // IMongoContext
 services.RegisterMongoContext(RegisterMode.Singleton);
 
-// Services
-services.RegisterGenericServices<PersonEntity>(RegisterMode.Transient);
+// Services (specifying the entities)
+services.RegisterGenericServices<ExampleEntity>(RegisterMode.Singleton);
+services.RegisterGenericServices<AnotherEntity>(RegisterMode.Scoped);
 
-...
+// Services (for all entities at the same time)
+services.RegisterAllGenericServices(RegisterMode.Scoped);
+
 ```
 
 Defining an entity and its collection name
 
 > The class must implement `IEntity` and have the attribute `CollectionName`
 
-```C#
+```csharp
 namespace Mongo.GenericClient.Tests.Setup
 {
     using Mongo.GenericClient.Core.Attributes;
@@ -157,19 +159,19 @@ Creating a collection (or just inserting data)
 
 > Using IMongoContext
 
-```C#
+```csharp
 await this.mongoContext.GetCollection<PersonEntity>().InsertOneAsync(entity);
 ```
 
 > Using the service
 
-```C#
+```csharp
 await this.writeService.CreateAsync(entity);
 ```
 
 Getting a list of documents as entities
 
-```C#
+```csharp
 var allEntities = this.readService.GetAll()
 var filteredEntities = this.readService.GetAll(x => x.Age == 30)
 ````

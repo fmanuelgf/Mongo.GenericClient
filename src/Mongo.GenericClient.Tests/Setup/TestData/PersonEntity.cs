@@ -1,4 +1,4 @@
-namespace Mongo.GenericClient.Tests.Setup
+namespace Mongo.GenericClient.Tests.Setup.TestData
 {
     using Mongo.GenericClient.Core.Attributes;
     using Mongo.GenericClient.Core.Entities;

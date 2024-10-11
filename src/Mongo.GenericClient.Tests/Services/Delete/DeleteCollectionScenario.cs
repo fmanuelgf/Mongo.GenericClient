@@ -2,7 +2,7 @@ namespace Mongo.GenericClient.Tests.Services.Delete
 {
     using System.Collections.Generic;
     using Mongo.GenericClient.Tests.Base;
-    using Mongo.GenericClient.Tests.Setup;
+    using Mongo.GenericClient.Tests.Setup.TestData;
     using MongoDB.Driver;
 
     public class DeleteCollectionScenario : ScenarioBase<PersonEntity>

@@ -18,14 +18,13 @@ namespace Mongo.GenericClient.Tests.Base
 
         public ScenarioBase()
         {
-            TestConfig.Configure();
-            Dependencies.Configure();
+            TestSetup.Configure();
             
-            var context = Dependencies.GetRequiredService<IMongoContext>();
+            var context = TestSetup.Dependencies.GetRequiredService<IMongoContext>();
             this.Collection = context.GetCollection<TEntity>();
 
-            this.ReadService = Dependencies.GetRequiredService<IReadService<TEntity>>();
-            this.WriteService = Dependencies.GetRequiredService<IWriteService<TEntity>>();
+            this.ReadService = TestSetup.Dependencies.GetRequiredService<IReadService<TEntity>>();
+            this.WriteService = TestSetup.Dependencies.GetRequiredService<IWriteService<TEntity>>();
         }
 
         public void ClearDatabase()

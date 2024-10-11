@@ -1,5 +1,9 @@
 # Mongo.GenericClient
 
+## Release 8.1.8
+
+- Add the `RegisterAllGenericServices` extension method.
+
 ## Release 8.1.7
 
 - Add `IMongoContext` to manage the collections.
