@@ -97,7 +97,7 @@ namespace Mongo.GenericClient.Core
 
 ## MongoHelper
 
->Note: Auxiliary helper not required for general use.
+>**Note:** Auxiliary helper that provides access to the MongoClient and the Database directly, **if needed**.
 
 ```csharp
 namespace Mongo.GenericClient
