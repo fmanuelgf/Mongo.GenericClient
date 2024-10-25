@@ -35,7 +35,7 @@ namespace Mongo.GenericClient.Tests.Services.Create
         public void CheckCollectionIsCreated()
         {
             Assert.That(
-                this.Collection.CountDocuments(Builders<PersonEntity>.Filter.Empty),
+                this.ReadService.CountDocuments(),
                 Is.GreaterThan(0)
             );
         }
@@ -43,7 +43,7 @@ namespace Mongo.GenericClient.Tests.Services.Create
         public void CheckCollectionCount(int expectedCount)
         {
             Assert.That(
-                this.Collection.CountDocuments(Builders<PersonEntity>.Filter.Empty),
+                this.ReadService.CountDocuments(),
                 Is.EqualTo(expectedCount)
             );
         }

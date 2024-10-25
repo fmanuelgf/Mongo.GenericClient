@@ -51,6 +51,12 @@ namespace Mongo.GenericClient.Tests.Services.Read
             await this.scenario.RunMethod("AsQueryable");
         }
 
+        [When("calling the CountDocuments method of the ReadService with (.*) filter")]
+        public async Task WhenCountDocumentsMethodIsCalledAsync(string filter)
+        {
+            await this.scenario.RunMethod("CountDocuments", filter);
+        }
+
         [When("calling the GetByIdAsync xyz as (.*) method of the ReadService")]
         public async Task WhenGetByIdMethodIsCalledAsync(string asType)
         {
@@ -81,8 +87,8 @@ namespace Mongo.GenericClient.Tests.Services.Read
             this.scenario.CheckPaginationResultField(field, number);
         }
 
-        [Then("Count equals (.*)")]
-        public void ThenCountEquals(int number)
+        [Then("Count (.*) equals (.*)")]
+        public void ThenCountEquals(string _, int number)
         {
             this.scenario.CheckCount(number);
         }

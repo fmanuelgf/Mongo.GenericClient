@@ -3,9 +3,7 @@ namespace Mongo.GenericClient.DependencyInjection
     using Microsoft.Extensions.DependencyInjection;
     using Mongo.GenericClient.Core;
     using Mongo.GenericClient.Core.Entities;
-    using Mongo.GenericClient.Core.Repositories;
     using Mongo.GenericClient.Core.Services;
-    using Mongo.GenericClient.Repositories;
     using Mongo.GenericClient.Services;
 
     public static class ServiceCollectionExtensions
@@ -87,46 +85,6 @@ namespace Mongo.GenericClient.DependencyInjection
                     services.AddSingleton(typeof(IWriteService<>), typeof(WriteService<>));
                     break;
             }
-        }
-
-        /// <summary>
-        /// Register IGenericRepository and its implementation for the given Entity.
-        /// </summary>
-        /// <typeparam name="TEntity">The <see cref="TEntity"/>.</typeparam>
-        /// <param name="registerMode">The <see cref="RegisterMode"> (Transient, Scoped, Singleton).</param>
-        [Obsolete("This method will be removed.")]
-        public static void RegisterGenericRepository<TEntity>(
-            this IServiceCollection services,
-            RegisterMode registerMode = RegisterMode.Singleton) where TEntity : IEntity
-        {
-            switch (registerMode)
-            {
-                case RegisterMode.Transient:
-                    services.AddTransient<IGenericRepository<TEntity>, GenericRepository<TEntity>>();
-                    break;
-
-                case RegisterMode.Scoped:
-                    services.AddScoped<IGenericRepository<TEntity>, GenericRepository<TEntity>>();
-                    break;
-
-                default:
-                    services.AddSingleton<IGenericRepository<TEntity>, GenericRepository<TEntity>>();
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Register IGenericRepository, IReadService, IWriteService and their implementations for the given Entity.
-        /// </summary>
-        /// <typeparam name="TEntity">The <see cref="TEntity"/>.</typeparam>
-        /// <param name="registerMode">The <see cref="RegisterMode"> (Transient, Scoped, Singleton).</param>
-        [Obsolete("This method will be removed.")]
-        public static void RegisterGenericRepositoryAndServices<TEntity>(
-            this IServiceCollection services,
-            RegisterMode registerMode = RegisterMode.Singleton) where TEntity : IEntity
-        {
-            services.RegisterGenericRepository<TEntity>(registerMode);
-            services.RegisterGenericServices<TEntity>(registerMode);
         }
     }
 }

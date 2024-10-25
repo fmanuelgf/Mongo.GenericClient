@@ -26,8 +26,6 @@ namespace Mongo.GenericClient.Core.Services
     {
         IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter = null);
 
-        IMongoQueryable<TEntity> AsQueryable();
-
         Task<PaginationResult<TEntity>> GetPaginatedAsync(
             int pageNum,
             int pageSize);
@@ -40,6 +38,10 @@ namespace Mongo.GenericClient.Core.Services
         Task<TEntity> GetByIdAsync(ObjectId id);
 
         Task<TEntity> GetByIdAsync(string id);
+
+        IMongoQueryable<TEntity> AsQueryable();
+
+        long CountDocuments(Expression<Func<TEntity, bool>>? filter = null);
     }
 }
 ```

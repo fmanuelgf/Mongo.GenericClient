@@ -31,13 +31,6 @@ namespace Mongo.GenericClient.Services
         }
 
         /// <inheritdoc />
-        public virtual IMongoQueryable<TEntity> AsQueryable()
-        {
-            return this.collection
-                .AsQueryable();
-        }
-
-        /// <inheritdoc />
         public virtual Task<PaginationResult<TEntity>> GetPaginatedAsync(
             int pageNum,
             int pageSize)
@@ -75,6 +68,18 @@ namespace Mongo.GenericClient.Services
             }
             
             throw new ArgumentException($"'{id}' is not a valid ObjectId");
+        }
+
+        /// <inheritdoc />
+        public virtual IMongoQueryable<TEntity> AsQueryable()
+        {
+            return this.collection.AsQueryable();
+        }
+
+        /// <inheritdoc />
+        public virtual long CountDocuments(Expression<Func<TEntity, bool>>? filter = null)
+        {
+            return this.collection.CountDocuments(filter ?? Builders<TEntity>.Filter.Empty);
         }
 
         private async Task<PaginationResult<TEntity>> GetPaginatedAsync(

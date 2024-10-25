@@ -19,12 +19,6 @@ namespace Mongo.GenericClient.Core.Services
         IList<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter = null);
 
         /// <summary>
-        /// Creates a queryable source of documents of type <see cref="TEntity"/>.
-        /// </summary>
-        /// <returns>The <see cref="IMongoQueryable{TEntity}"/>.</returns>
-        IMongoQueryable<TEntity> AsQueryable();
-
-        /// <summary>
         /// Get a paginated result containing a list of type <see cref="TEntity"/>.
         /// </summary>
         /// <param name="pageNum">The page number.</param>
@@ -59,5 +53,18 @@ namespace Mongo.GenericClient.Core.Services
         /// <param name="id">The ID of the document.</param>
         /// <returns>The <see cref="TEntity"/> mapping the document.</returns>
         Task<TEntity> GetByIdAsync(string id);
+
+        /// <summary>
+        /// Creates a queryable source of documents of type <see cref="TEntity"/>.
+        /// </summary>
+        /// <returns>The <see cref="IMongoQueryable{TEntity}"/>.</returns>
+        IMongoQueryable<TEntity> AsQueryable();
+
+        /// <summary>
+        /// Get the count of documents of type <see cref="TEntity"/>.
+        /// </summary>
+        /// <param name="filter">The filter to be applied.</param>
+        /// <returns>The count as <see cref="long"></returns>
+        long CountDocuments(Expression<Func<TEntity, bool>>? filter = null);
     }
 }

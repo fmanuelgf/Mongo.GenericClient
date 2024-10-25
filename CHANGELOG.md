@@ -1,5 +1,10 @@
 # Mongo.GenericClient
 
+## Release 8.2.0
+
+- Remove obsolete code.
+- Add method `CountDocuments` to ReadService.
+
 ## Release 8.1.8
 
 - Add the `RegisterAllGenericServices` extension method.

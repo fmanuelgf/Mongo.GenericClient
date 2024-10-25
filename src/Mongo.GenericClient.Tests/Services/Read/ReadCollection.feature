@@ -37,7 +37,19 @@ Scenario: Can get the documents count using AsQueryable
     Given a ReadService of PersonEntity
     And a collection of 50 persons exist
     When calling the AsQueryable method of the ReadService
-    Then Count equals 50
+    Then Count property equals 50
+
+Scenario Outline: Can get the documents count using CountDocuments
+    Given a ReadService of PersonEntity
+    And a collection of 50 persons exist
+    And 10 of the persons have the Name 'John'
+    When calling the CountDocuments method of the ReadService with <filter> filter
+    Then Count number equals <number>
+
+    Examples:
+        | filter       | number | 
+        | null         | 50     |
+        | name is John | 10     |
 
 Scenario Outline: Can GetById
     Given a ReadService of PersonEntity

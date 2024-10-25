@@ -11,7 +11,7 @@ namespace Mongo.GenericClient.Tests.Services.Read
     {
         private PaginationResult<PersonEntity>? pagination;
         private IList<PersonEntity> personEntities;
-        private IMongoQueryable<PersonEntity>? query;
+        private long count;
         private ObjectId objectId;
         
         public ArgumentException? ExpectedExcepion { get; set; }
@@ -53,7 +53,13 @@ namespace Mongo.GenericClient.Tests.Services.Read
             switch (method)
             {
                 case "AsQueryable":
-                    this.query = this.ReadService.AsQueryable();
+                    this.count = this.ReadService.AsQueryable().Count();
+                    break;
+                
+                case "CountDocuments":
+                    this.count = filter == "name is John"
+                        ? this.ReadService.CountDocuments(x => x.Name == "John")
+                        : this.ReadService.CountDocuments();
                     break;
 
                 case "GetAll":
@@ -94,7 +100,7 @@ namespace Mongo.GenericClient.Tests.Services.Read
 
         public void CheckCount(int expectedCount)
         {
-            Assert.That(this.query?.Count(), Is.EqualTo(expectedCount));
+            Assert.That(this.count, Is.EqualTo(expectedCount));
         }
 
         public void CheckPersonEntitiesCount(int expectedCount)
