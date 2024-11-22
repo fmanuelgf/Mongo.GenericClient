@@ -1,6 +1,6 @@
 # Mongo.GenericClient
 
-## Release 8.2.1
+## Release 8.3.0
 
 - Update nuget packages.
 - The `AsQueryable()` method now returns an `IQueryable` object instead of the deprecated `IMogoQueryable`.
