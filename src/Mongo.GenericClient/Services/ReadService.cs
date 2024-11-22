@@ -71,7 +71,7 @@ namespace Mongo.GenericClient.Services
         }
 
         /// <inheritdoc />
-        public virtual IMongoQueryable<TEntity> AsQueryable()
+        public virtual IQueryable<TEntity> AsQueryable()
         {
             return this.collection.AsQueryable();
         }

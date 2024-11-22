@@ -57,8 +57,8 @@ namespace Mongo.GenericClient.Core.Services
         /// <summary>
         /// Creates a queryable source of documents of type <see cref="TEntity"/>.
         /// </summary>
-        /// <returns>The <see cref="IMongoQueryable{TEntity}"/>.</returns>
-        IMongoQueryable<TEntity> AsQueryable();
+        /// <returns>The <see cref="IQueryable{TEntity}"/>.</returns>
+        IQueryable<TEntity> AsQueryable();
 
         /// <summary>
         /// Get the count of documents of type <see cref="TEntity"/>.

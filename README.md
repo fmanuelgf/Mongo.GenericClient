@@ -39,7 +39,7 @@ namespace Mongo.GenericClient.Core.Services
 
         Task<TEntity> GetByIdAsync(string id);
 
-        IMongoQueryable<TEntity> AsQueryable();
+        IQueryable<TEntity> AsQueryable();
 
         long CountDocuments(Expression<Func<TEntity, bool>>? filter = null);
     }
