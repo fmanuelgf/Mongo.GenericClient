@@ -1,5 +1,9 @@
 # Mongo.GenericClient
 
+## Release 9.0.0
+
+- Upgrade to dotnet 9
+
 ## Release 8.3.0
 
 - Update nuget packages.
