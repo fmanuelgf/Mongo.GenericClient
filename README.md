@@ -99,7 +99,7 @@ namespace Mongo.GenericClient.Core
 
 ## MongoHelper
 
->**Note:** Auxiliary helper that provides access to the MongoClient and the Database directly, **if needed**.
+Auxiliary helper that provides access to the MongoClient and the Database directly, **if needed**.
 
 ```csharp
 namespace Mongo.GenericClient
@@ -136,7 +136,7 @@ services.RegisterAllGenericServices(RegisterMode.Scoped);
 
 Defining an entity and its collection name
 
-> The class must implement `IEntity` and have the attribute `CollectionName`.
+**Note:** The class must implement `IEntity` and have the attribute `CollectionName`.
 
 ```csharp
 namespace Mongo.GenericClient.Tests.Setup
@@ -159,13 +159,13 @@ namespace Mongo.GenericClient.Tests.Setup
 
 Creating a collection (or just inserting data)
 
-> Using IMongoContext
+- Using IMongoContext
 
 ```csharp
 await this.mongoContext.GetCollection<PersonEntity>().InsertOneAsync(entity);
 ```
 
-> Using the service
+- Using the service
 
 ```csharp
 await this.writeService.CreateAsync(entity);
