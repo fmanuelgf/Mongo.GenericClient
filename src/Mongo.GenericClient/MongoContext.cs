@@ -15,10 +15,7 @@ namespace Mongo.GenericClient
             this.database = client.GetDatabase(AppConfig.DatabaseName);
         }
         
-        /// <summary>
-        /// Get the collection of type <see cref="TEntity"/>.
-        /// </summary>
-        /// <returns>The <see cref="IMongoCollection"/>.</returns>
+        /// <inheritdoc />
         public IMongoCollection<TEntity> GetCollection<TEntity>()
             where TEntity : IEntity
         {
