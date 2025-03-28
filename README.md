@@ -63,6 +63,14 @@ namespace Mongo.GenericClient.Core.Services
         Task DeleteAsync(ObjectId id);
         
         Task DeleteAsync(string id);
+
+        Task DeleteAsync(ObjectId[] ids);
+        
+        Task DeleteAsync(IList<ObjectId> ids);
+        
+        Task DeleteAsync(string[] ids);
+        
+        Task DeleteAsync(IList<string> ids);
     }
 }
 ```

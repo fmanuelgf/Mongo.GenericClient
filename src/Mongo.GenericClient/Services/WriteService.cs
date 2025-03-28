@@ -61,5 +61,45 @@ namespace Mongo.GenericClient.Services
             
             await this.DeleteAsync(objectId);
         }
+
+        /// <inheritdoc />
+        public virtual async Task DeleteAsync(ObjectId[] ids)
+        {
+            await this.DeleteAsync(ids);
+        }
+
+        /// <inheritdoc />
+        public virtual async Task DeleteAsync(IList<ObjectId> ids)
+        {
+            var filter = Builders<TEntity>
+                .Filter
+                .Where(x => ids.Contains(x.Id));
+
+            var result = await this.collection
+                .DeleteManyAsync(filter);
+        }
+
+        /// <inheritdoc />
+        public virtual async Task DeleteAsync(string[] ids)
+        {
+            await this.DeleteAsync(ids.ToList());
+        }
+
+        /// <inheritdoc />
+        public virtual async Task DeleteAsync(IList<string> ids)
+        {
+            var objIds = new List<ObjectId>();
+            foreach (var id in ids)
+            {
+                if (!ObjectId.TryParse(id, out var objectId))
+                {
+                    throw new ArgumentException($"'{id}' is not a valid ObjectId");
+                }
+
+                objIds.Add(objectId);
+            }
+            
+            await this.DeleteAsync(objIds);
+        }
     }
 }

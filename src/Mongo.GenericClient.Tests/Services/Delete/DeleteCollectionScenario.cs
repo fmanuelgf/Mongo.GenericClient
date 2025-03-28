@@ -40,6 +40,41 @@ namespace Mongo.GenericClient.Tests.Services.Delete
             }
         }
 
+        public async Task RunDeleteAsyncMethodAsync(string colType, string asType, int number)
+        {
+            switch (asType)
+            {
+                case "ObjectId":
+                    var objIds = this.personEntities.Take(number).Select(x => x.Id);
+                    await this.WriteService.DeleteAsync(colType == "an array"
+                        ? objIds.ToArray()
+                        : objIds.ToList());
+                    break;
+
+                case "string":
+                    var idStrings = this.personEntities.Take(number).Select(x => x.Id.ToString()).ToArray();
+                    await this.WriteService.DeleteAsync(colType == "an array"
+                        ? idStrings
+                        : idStrings.ToList());
+                    break;
+
+                default:
+                    throw new ArgumentException($"Unknown type {asType}");
+            }
+        }
+
+        public void RunDeleteAsyncMethodWithInvalidId(string colType, int number)
+        {
+            var idStrings = this.personEntities.Take(number).Select(x => x.Id.ToString()).ToArray();
+            idStrings[0] = "foo";
+
+            this.ExpectedExcepion = Assert.ThrowsAsync<ArgumentException>(async () =>
+                await this.WriteService.DeleteAsync(colType == "an array"
+                    ? idStrings
+                    : idStrings.ToList())
+            );
+        }
+
         public void CheckCollectionCount(int expectedCount)
         {
             Assert.That(

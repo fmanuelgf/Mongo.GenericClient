@@ -28,9 +28,33 @@ namespace Mongo.GenericClient.Core.Services
         Task DeleteAsync(ObjectId id);
 
         /// <summary>
+        /// Delete an array of documents of type <see cref="TEntity"/>.
+        /// </summary>
+        /// <param name="ids">The array of IDs of the documents to delete.</param>
+        Task DeleteAsync(ObjectId[] ids);
+
+        /// <summary>
+        /// Delete an array of documents of type <see cref="TEntity"/>.
+        /// </summary>
+        /// <param name="ids">The array of IDs of the documents to delete.</param>
+        Task DeleteAsync(IList<ObjectId> ids);
+
+        /// <summary>
         /// Delete a document of type <see cref="TEntity"/>.
         /// </summary>
         /// <param name="id">The ID of the document to delete.</param>
         Task DeleteAsync(string id);
+
+        /// <summary>
+        /// Delete an array of documents of type <see cref="TEntity"/>.
+        /// </summary>
+        /// <param name="ids">The array of IDs of the documents to delete.</param>
+        Task DeleteAsync(string[] ids);
+
+        /// <summary>
+        /// Delete an array of documents of type <see cref="TEntity"/>.
+        /// </summary>
+        /// <param name="ids">The array of IDs of the documents to delete.</param>
+        Task DeleteAsync(IList<string> ids);
     }
 }

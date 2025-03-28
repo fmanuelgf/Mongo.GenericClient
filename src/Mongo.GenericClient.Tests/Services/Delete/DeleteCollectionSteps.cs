@@ -39,6 +39,18 @@ namespace Mongo.GenericClient.Tests.Services.Delete
             await this.scenario.RunDeleteAsyncMethodAsync(asType);
         }
 
+        [When("calling the DeleteAsync (.*) of (.*) IDs as (ObjectId|string) method of the WriteService")]
+        public async Task WhenMethodIsCalledAsync(string colType, int number, string asType)
+        {
+            await this.scenario.RunDeleteAsyncMethodAsync(colType, asType, number);
+        }
+
+        [When("calling the DeleteAsync (.*) of (.*) IDs as string method of the WriteService with an invalid ID")]
+        public void WhenMethodIsCalledWithInvalidId(string colType, int number)
+        {
+            this.scenario.RunDeleteAsyncMethodWithInvalidId(colType, number);
+        }
+
         [When("calling the DeleteAsync foo method of the WriteService")]
         public void WhenMethodIsCalledWithInvalidIdOrName()
         {
