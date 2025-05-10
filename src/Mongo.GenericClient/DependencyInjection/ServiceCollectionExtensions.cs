@@ -5,6 +5,7 @@ namespace Mongo.GenericClient.DependencyInjection
     using Mongo.GenericClient.Core.Entities;
     using Mongo.GenericClient.Core.Services;
     using Mongo.GenericClient.Services;
+    using MongoDB.Driver;
 
     public static class ServiceCollectionExtensions
     {
@@ -14,20 +15,21 @@ namespace Mongo.GenericClient.DependencyInjection
         /// <param name="registerMode">The <see cref="RegisterMode"> (Transient, Scoped, Singleton).</param>
         public static void RegisterMongoContext(
             this IServiceCollection services,
-            RegisterMode registerMode = RegisterMode.Singleton)
+            RegisterMode registerMode = RegisterMode.Singleton,
+            MongoClientSettings? settings = default)
         {
             switch (registerMode)
             {
                 case RegisterMode.Transient:
-                    services.AddTransient<IMongoContext, MongoContext>();
+                    services.AddTransient<IMongoContext, MongoContext>(x => new MongoContext(settings));
                     break;
 
                 case RegisterMode.Scoped:
-                    services.AddScoped<IMongoContext, MongoContext>();
+                    services.AddScoped<IMongoContext, MongoContext>(x => new MongoContext(settings));
                     break;
 
                 default:
-                    services.AddSingleton<IMongoContext, MongoContext>();
+                    services.AddSingleton<IMongoContext, MongoContext>(x => new MongoContext(settings));
                     break;
             }
         }

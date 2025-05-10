@@ -1,5 +1,10 @@
 # Mongo.GenericClient
 
+## Release 9.0.3
+
+- Add MongoClientSettings
+- Update nuget packages
+
 ## Release 9.0.2
 
 - Add methods to delete an array of documents

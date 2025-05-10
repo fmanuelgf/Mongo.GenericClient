@@ -9,9 +9,9 @@ namespace Mongo.GenericClient
     {
         private readonly IMongoDatabase database;
 
-        public MongoContext()
+        public MongoContext(MongoClientSettings? settings = default)
         {
-            var client = new MongoClient(AppConfig.ConnectionString);
+            var client = new MongoClient(settings ?? AppConfig.DefaultMongoClientSettings);
             this.database = client.GetDatabase(AppConfig.DatabaseName);
         }
         

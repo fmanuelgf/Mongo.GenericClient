@@ -130,8 +130,15 @@ First, register `IMongoContext` and the services for all the entities to be used
 ```csharp
 using Mongo.GenericClient.DependencyInjection;
 
-// IMongoContext
+// IMongoContext, using the default settings (see `Required environment variables`)
 services.RegisterMongoContext(RegisterMode.Singleton);
+
+// IMongoContext, using more configuration parameters
+var settings = AppConfig.DefaultMongoClientSettings;
+settings.ReadConcern = ReadConcern.Majority;
+settings.WriteConcern = WriteConcern.WMajority;
+
+services.RegisterMongoContext(RegisterMode.Singleton, settings);
 
 // Services (specifying the entities)
 services.RegisterGenericServices<ExampleEntity>(RegisterMode.Singleton);
