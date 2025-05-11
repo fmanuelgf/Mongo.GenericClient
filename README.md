@@ -133,7 +133,7 @@ using Mongo.GenericClient.DependencyInjection;
 // IMongoContext, using the default settings (see `Required environment variables`)
 services.RegisterMongoContext(RegisterMode.Singleton);
 
-// IMongoContext, using more configuration parameters
+// IMongoContext, using more configuration settings
 var settings = AppConfig.DefaultMongoClientSettings;
 settings.ReadConcern = ReadConcern.Majority;
 settings.WriteConcern = WriteConcern.WMajority;

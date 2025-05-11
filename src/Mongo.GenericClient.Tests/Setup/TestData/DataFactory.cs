@@ -4,7 +4,7 @@ namespace Mongo.GenericClient.Tests.Setup.TestData
 
     public static class DataFactory
     {
-        private static readonly Random random= new Random((int)DateTime.Today.Ticks);
+        private static readonly Random random = new((int)DateTime.Today.Ticks);
         
         public static PersonEntity BuildRandomPerson(string name)
         {
