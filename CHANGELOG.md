@@ -1,5 +1,9 @@
 # Mongo.GenericClient
 
+## Release 9.0.4
+
+- Update nuget packages
+
 ## Release 9.0.3
 
 - Add MongoClientSettings
