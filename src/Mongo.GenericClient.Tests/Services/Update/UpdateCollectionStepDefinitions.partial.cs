@@ -3,11 +3,11 @@ namespace Mongo.GenericClient.Tests.Services.Update
     using Mongo.GenericClient.Tests.Base;
     using Mongo.GenericClient.Tests.Setup.TestData;
 
-    public class UpdateCollectionScenario : ScenarioBase<PersonEntity>
+    public partial class UpdateCollectionStepDefinitions : StepDefinitions<PersonEntity>
     {
         private PersonEntity personToUpdate;
 
-        public UpdateCollectionScenario()
+        public UpdateCollectionStepDefinitions()
             : base()
         {
             this.personToUpdate = DataFactory.BuildRandomPerson("John");

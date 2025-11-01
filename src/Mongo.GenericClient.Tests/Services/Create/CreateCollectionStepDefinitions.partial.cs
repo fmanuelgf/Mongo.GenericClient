@@ -4,11 +4,11 @@ namespace Mongo.GenericClient.Tests.Services.Create
     using Mongo.GenericClient.Tests.Setup.TestData;
     using MongoDB.Driver;
 
-    public class CreateCollectionScenario : ScenarioBase<PersonEntity>
+    public partial class CreateCollectionStepDefinitions : StepDefinitions<PersonEntity>
     {
         private List<PersonEntity> personEntities;
 
-        public CreateCollectionScenario()
+        public CreateCollectionStepDefinitions()
             : base()
         {
             this.personEntities = new List<PersonEntity>();

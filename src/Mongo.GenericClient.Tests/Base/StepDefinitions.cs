@@ -7,7 +7,7 @@ namespace Mongo.GenericClient.Tests.Base
     using Mongo.GenericClient.Tests.Setup;
     using MongoDB.Driver;
 
-    public abstract class ScenarioBase<TEntity> : IDisposable
+    public abstract class StepDefinitions<TEntity> : IDisposable
         where TEntity : IEntity
     {
         public IMongoCollection<TEntity> Collection { get; set; }
@@ -16,7 +16,7 @@ namespace Mongo.GenericClient.Tests.Base
         
         public IWriteService<TEntity> WriteService { get; set; }
 
-        public ScenarioBase()
+        public StepDefinitions()
         {
             TestSetup.Configure();
             

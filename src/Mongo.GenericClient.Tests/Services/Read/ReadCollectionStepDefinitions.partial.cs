@@ -7,7 +7,7 @@ namespace Mongo.GenericClient.Tests.Services.Read
     using MongoDB.Driver;
     using MongoDB.Driver.Linq;
 
-    public class ReadCollectionScenario : ScenarioBase<PersonEntity>
+    public partial class ReadCollectionStepDefinitions : StepDefinitions<PersonEntity>
     {
         private PaginationResult<PersonEntity>? pagination;
         private IList<PersonEntity> personEntities;
@@ -16,7 +16,7 @@ namespace Mongo.GenericClient.Tests.Services.Read
         
         public ArgumentException? ExpectedExcepion { get; set; }
 
-        public ReadCollectionScenario()
+        public ReadCollectionStepDefinitions()
             : base()
         {
             this.personEntities = new List<PersonEntity>();

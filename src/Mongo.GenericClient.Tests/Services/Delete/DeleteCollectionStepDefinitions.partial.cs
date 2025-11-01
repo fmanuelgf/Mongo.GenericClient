@@ -5,13 +5,13 @@ namespace Mongo.GenericClient.Tests.Services.Delete
     using Mongo.GenericClient.Tests.Setup.TestData;
     using MongoDB.Driver;
 
-    public class DeleteCollectionScenario : ScenarioBase<PersonEntity>
+    public partial class DeleteCollectionStepDefinitions : StepDefinitions<PersonEntity>
     {
         private List<PersonEntity> personEntities;
         
         public ArgumentException? ExpectedExcepion { get; set; }
 
-        public DeleteCollectionScenario()
+        public DeleteCollectionStepDefinitions()
             : base()
         {
             this.personEntities = new List<PersonEntity>();
