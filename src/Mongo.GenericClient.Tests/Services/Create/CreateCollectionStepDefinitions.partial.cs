@@ -11,15 +11,15 @@ namespace Mongo.GenericClient.Tests.Services.Create
         public CreateCollectionStepDefinitions()
             : base()
         {
-            this.personEntities = new List<PersonEntity>();
+            this.personEntities = [];
         }
 
-        public void CreatePersonEntities(int number)
+        private void CreatePersonEntities(int number)
         {
             this.personEntities = DataFactory.BuildRandomPersonsList(number);
         }
 
-        public async Task RunMethodAsync(string method)
+        private async Task RunMethodAsync(string method)
         {
             switch (method)
             {
@@ -32,7 +32,7 @@ namespace Mongo.GenericClient.Tests.Services.Create
             }
         }
 
-        public void CheckCollectionIsCreated()
+        private void CheckCollectionIsCreated()
         {
             Assert.That(
                 this.ReadService.CountDocuments(),
@@ -40,7 +40,7 @@ namespace Mongo.GenericClient.Tests.Services.Create
             );
         }
 
-        public void CheckCollectionCount(int expectedCount)
+        private void CheckCollectionCount(int expectedCount)
         {
             Assert.That(
                 this.ReadService.CountDocuments(),

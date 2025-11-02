@@ -10,11 +10,11 @@ namespace Mongo.GenericClient.Tests.Base
     public abstract class StepDefinitions<TEntity> : IDisposable
         where TEntity : IEntity
     {
-        public IMongoCollection<TEntity> Collection { get; set; }
+        protected IMongoCollection<TEntity> Collection { get; set; }
         
-        public IReadService<TEntity> ReadService { get; set; }
+        protected IReadService<TEntity> ReadService { get; set; }
         
-        public IWriteService<TEntity> WriteService { get; set; }
+        protected IWriteService<TEntity> WriteService { get; set; }
 
         public StepDefinitions()
         {
@@ -27,14 +27,14 @@ namespace Mongo.GenericClient.Tests.Base
             this.WriteService = TestSetup.Dependencies.GetRequiredService<IWriteService<TEntity>>();
         }
 
-        public void ClearDatabase()
-        {
-            MongoHelper.Client.DropDatabase(AppConfig.DatabaseName);
-        }
-
         public void Dispose()
         {
             this.ClearDatabase();
+        }
+
+        protected void ClearDatabase()
+        {
+            MongoHelper.Client.DropDatabase(AppConfig.DatabaseName);
         }
     }
 }

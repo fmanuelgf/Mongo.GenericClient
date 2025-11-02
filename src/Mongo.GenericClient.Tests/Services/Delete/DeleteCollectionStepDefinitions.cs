@@ -47,7 +47,7 @@ namespace Mongo.GenericClient.Tests.Services.Delete
         [When("calling the DeleteAsync foo method of the WriteService")]
         public void WhenMethodIsCalledWithInvalidIdOrName()
         {
-            this.ExpectedExcepion = Assert.ThrowsAsync<ArgumentException>(async () =>
+            this.expectedException = Assert.ThrowsAsync<ArgumentException>(async () =>
                 await this.WriteService.DeleteAsync("foo")
             );
         }
@@ -61,14 +61,14 @@ namespace Mongo.GenericClient.Tests.Services.Delete
         [Then("an Exception is thrown")]
         public void ThenTheExpectedErrorIsThrown()
         {
-            Assert.That(this.ExpectedExcepion, Is.Not.Null);
+            Assert.That(this.expectedException, Is.Not.Null);
         }
 
         [Then("the Exception message is 'foo is not a valid ObjectId'")]
         public void ThenTheExpectedErrorMessageIs()
         {
             Assert.That(
-                this.ExpectedExcepion?.Message,
+                this.expectedException?.Message,
                 Is.EqualTo("'foo' is not a valid ObjectId")
             );
         }

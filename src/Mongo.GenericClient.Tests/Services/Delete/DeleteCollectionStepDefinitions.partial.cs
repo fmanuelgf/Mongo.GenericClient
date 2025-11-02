@@ -8,8 +8,7 @@ namespace Mongo.GenericClient.Tests.Services.Delete
     public partial class DeleteCollectionStepDefinitions : StepDefinitions<PersonEntity>
     {
         private List<PersonEntity> personEntities;
-        
-        public ArgumentException? ExpectedExcepion { get; set; }
+        private ArgumentException? expectedException;
 
         public DeleteCollectionStepDefinitions()
             : base()
@@ -17,13 +16,13 @@ namespace Mongo.GenericClient.Tests.Services.Delete
             this.personEntities = new List<PersonEntity>();
         }
 
-        public async Task CreatePersonCollectionAsync(int number)
+        private async Task CreatePersonCollectionAsync(int number)
         {
             this.personEntities = DataFactory.BuildRandomPersonsList(number);
             await this.Collection.InsertManyAsync(this.personEntities);
         }
 
-        public async Task RunDeleteAsyncMethodAsync(string asType)
+        private async Task RunDeleteAsyncMethodAsync(string asType)
         {
             switch (asType)
             {
@@ -40,7 +39,7 @@ namespace Mongo.GenericClient.Tests.Services.Delete
             }
         }
 
-        public async Task RunDeleteAsyncMethodAsync(string colType, string asType, int number)
+        private async Task RunDeleteAsyncMethodAsync(string colType, string asType, int number)
         {
             switch (asType)
             {
@@ -63,19 +62,19 @@ namespace Mongo.GenericClient.Tests.Services.Delete
             }
         }
 
-        public void RunDeleteAsyncMethodWithInvalidId(string colType, int number)
+        private void RunDeleteAsyncMethodWithInvalidId(string colType, int number)
         {
             var idStrings = this.personEntities.Take(number).Select(x => x.Id.ToString()).ToArray();
             idStrings[0] = "foo";
 
-            this.ExpectedExcepion = Assert.ThrowsAsync<ArgumentException>(async () =>
+            this.expectedException = Assert.ThrowsAsync<ArgumentException>(async () =>
                 await this.WriteService.DeleteAsync(colType == "an array"
                     ? idStrings
                     : idStrings.ToList())
             );
         }
 
-        public void CheckCollectionCount(int expectedCount)
+        private void CheckCollectionCount(int expectedCount)
         {
             Assert.That(
                 this.ReadService.CountDocuments(),

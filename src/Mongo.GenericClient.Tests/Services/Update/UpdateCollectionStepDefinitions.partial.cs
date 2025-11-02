@@ -13,12 +13,12 @@ namespace Mongo.GenericClient.Tests.Services.Update
             this.personToUpdate = DataFactory.BuildRandomPerson("John");
         }
 
-        public async Task CreatePersonCollectionAsync()
+        private async Task CreatePersonCollectionAsync()
         {
             await this.Collection.InsertOneAsync(this.personToUpdate);
         }
 
-        public void ModifyPersonEntity(string field, string value)
+        private void ModifyPersonEntity(string field, string value)
         {
             switch (field)
             {
@@ -35,7 +35,7 @@ namespace Mongo.GenericClient.Tests.Services.Update
             }
         }
 
-        public async Task RunMethodAsync(string method)
+        private async Task RunMethodAsync(string method)
         {
             switch (method)
             {
@@ -48,7 +48,7 @@ namespace Mongo.GenericClient.Tests.Services.Update
             }
         }
 
-        public async Task CheckTheEntityIsUpdatedAsync(string field, string value)
+        private async Task CheckTheEntityIsUpdatedAsync(string field, string value)
         {
             var entity = await this.ReadService.GetByIdAsync(this.personToUpdate.Id);
             switch (field)

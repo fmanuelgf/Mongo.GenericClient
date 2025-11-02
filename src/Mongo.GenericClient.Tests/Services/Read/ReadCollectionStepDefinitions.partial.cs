@@ -13,8 +13,7 @@ namespace Mongo.GenericClient.Tests.Services.Read
         private IList<PersonEntity> personEntities;
         private long count;
         private ObjectId objectId;
-        
-        public ArgumentException? ExpectedExcepion { get; set; }
+        private ArgumentException? expectedException;
 
         public ReadCollectionStepDefinitions()
             : base()
@@ -22,13 +21,13 @@ namespace Mongo.GenericClient.Tests.Services.Read
             this.personEntities = new List<PersonEntity>();
         }
 
-        public async Task CreatePersonCollectionAsync(int number)
+        private async Task CreatePersonCollectionAsync(int number)
         {
             var entities = DataFactory.BuildRandomPersonsList(number);
             await this.Collection.InsertManyAsync(entities);
         }
 
-        public async Task UpdatePersonsName(int number, string name)
+        private async Task UpdatePersonsName(int number, string name)
         {
             var entities = this.Collection
                 .AsQueryable()
@@ -48,7 +47,7 @@ namespace Mongo.GenericClient.Tests.Services.Read
             }
         }
 
-        public async Task RunMethod(string method, string? filter = null)
+        private async Task RunMethod(string method, string? filter = null)
         {
             switch (method)
             {
@@ -76,7 +75,7 @@ namespace Mongo.GenericClient.Tests.Services.Read
                     break;
 
                 case "GetByIdAsync foo":
-                    this.ExpectedExcepion = Assert.ThrowsAsync<ArgumentException>(async () =>
+                    this.expectedException = Assert.ThrowsAsync<ArgumentException>(async () =>
                         await this.ReadService.GetByIdAsync("foo")
                     );
                     break;
@@ -86,34 +85,34 @@ namespace Mongo.GenericClient.Tests.Services.Read
             }
         }
 
-        public async Task RunGetPaginatedAsyncAsync(int pageNum, int pageSize, string? filter = null)
+        private async Task RunGetPaginatedAsyncAsync(int pageNum, int pageSize, string? filter = null)
         {
             this.pagination = filter == "name is John"
                 ? await this.ReadService.GetPaginatedAsync(x => x.Name == "John", pageNum, pageSize)
                 : await this.ReadService.GetPaginatedAsync(pageNum, pageSize);
         }
 
-        public void CheckPageResultIsReturned()
+        private void CheckPageResultIsReturned()
         {
             Assert.That(this.pagination?.Result, Is.Not.Null);
         }
 
-        public void CheckCount(int expectedCount)
+        private void CheckCount(int expectedCount)
         {
             Assert.That(this.count, Is.EqualTo(expectedCount));
         }
 
-        public void CheckPersonEntitiesCount(int expectedCount)
+        private void CheckPersonEntitiesCount(int expectedCount)
         {
             Assert.That(this.personEntities.Count(), Is.EqualTo(expectedCount));
         }
 
-        public void CheckPersonEntitiesName(int expectedCount, string name)
+        private void CheckPersonEntitiesName(int expectedCount, string name)
         {
             Assert.That(this.personEntities.Count(x => x.Name == name), Is.EqualTo(expectedCount));
         }
 
-        public void CheckPaginationResultField(string field, int expectedValue)
+        private void CheckPaginationResultField(string field, int expectedValue)
         {
             switch(field)
             {
