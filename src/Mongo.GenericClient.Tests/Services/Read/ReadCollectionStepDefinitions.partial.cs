@@ -43,7 +43,10 @@ namespace Mongo.GenericClient.Tests.Services.Read
             {
                 var filter = Builders<PersonEntity>.Filter.Eq(x => x.Id, entity.Id);
                 entity.Name = name;
-                await this.Collection.ReplaceOneAsync(filter, entity);
+                await this.Collection.UpdateOneAsync(
+                    filter,
+                    new BsonDocument("$set", entity.ToBsonDocument())
+                );
             }
         }
 

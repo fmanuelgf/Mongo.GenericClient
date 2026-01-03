@@ -35,7 +35,10 @@ namespace Mongo.GenericClient.Services
                 .Eq(x => x.Id, entity.Id);
 
             var result = await this.collection
-                .ReplaceOneAsync(filter, entity);
+                .UpdateOneAsync(
+                    filter, 
+                    new BsonDocument("$set", entity.ToBsonDocument())
+                );
 
             return result.ModifiedCount == 1;
         }
