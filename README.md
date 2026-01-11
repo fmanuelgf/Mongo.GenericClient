@@ -196,7 +196,7 @@ var filteredEntities = this.readService.GetAll(x => x.Age == 30);
 Updating an entity
 
 ```csharp
-// Having a `person` Entity, we can:
+// Having a `person` entity, we can:
 
 // Apply changes to the entity and then call `UpdateAsync`...
 this.writeService.UpdateAsync(person);
