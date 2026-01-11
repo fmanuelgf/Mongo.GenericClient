@@ -44,6 +44,39 @@ namespace Mongo.GenericClient.Services
         }
 
         /// <inheritdoc />
+        public virtual async Task<bool> UpdateAsync(ObjectId id, Dictionary<string, object> data)
+        {
+            var filter = Builders<TEntity>
+                .Filter
+                .Eq(x => x.Id, id);
+            
+            var result = await this.collection
+                .UpdateOneAsync(
+                    filter, 
+                    new BsonDocument("$set", data.ToBsonDocument())
+                );
+
+            return result.ModifiedCount == 1;
+        }
+
+        /// <inheritdoc />
+        public virtual async Task<bool> UpdateAsync(string id, Dictionary<string, object> data)
+        {
+            var objectId = id.ToObjectId();
+            var filter = Builders<TEntity>
+                .Filter
+                .Eq(x => x.Id, objectId);
+            
+            var result = await this.collection
+                .UpdateOneAsync(
+                    filter, 
+                    new BsonDocument("$set", data.ToBsonDocument())
+                );
+
+            return result.ModifiedCount == 1;
+        }
+
+        /// <inheritdoc />
         public virtual async Task DeleteAsync(ObjectId id)
         {
             var filter = Builders<TEntity>

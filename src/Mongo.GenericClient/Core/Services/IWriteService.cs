@@ -22,6 +22,22 @@ namespace Mongo.GenericClient.Core.Services
         Task<bool> UpdateAsync(TEntity entity);
 
         /// <summary>
+        /// Update a document of type <see cref="TEntity"/>.
+        /// </summary>
+        /// <param name="id">The <see cref="TEntity"/> ID.</param>
+        /// <param name="data">The field-value pairs to update.</param>
+        /// <returns>Whether the action was successful or not.</returns>
+        Task<bool> UpdateAsync(ObjectId id, Dictionary<string, object> data);
+
+        /// <summary>
+        /// Update a document of type <see cref="TEntity"/>.
+        /// </summary>
+        /// <param name="id">The <see cref="TEntity"/> ID.</param>
+        /// <param name="data">The field-value pairs to update.</param>
+        /// <returns>Whether the action was successful or not.</returns>
+        Task<bool> UpdateAsync(string id, Dictionary<string, object> data);
+
+        /// <summary>
         /// Delete a document of type <see cref="TEntity"/>.
         /// </summary>
         /// <param name="id">The ID of the document to delete.</param>

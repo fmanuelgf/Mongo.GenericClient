@@ -60,6 +60,10 @@ namespace Mongo.GenericClient.Core.Services
 
         Task<bool> UpdateAsync(TEntity entity);
 
+        Task<bool> UpdateAsync(ObjectId id, Dictionary<string, object> data);
+
+        Task<bool> UpdateAsync(string id, Dictionary<string, object> data);
+
         Task DeleteAsync(ObjectId id);
         
         Task DeleteAsync(string id);
@@ -174,15 +178,11 @@ namespace Mongo.GenericClient.Tests.Setup
 
 Creating a collection (or just inserting data)
 
-- Using IMongoContext
-
 ```csharp
+// Using IMongoContext
 await this.mongoContext.GetCollection<PersonEntity>().InsertOneAsync(entity);
-```
 
-- Using the service
-
-```csharp
+// Using the service
 await this.writeService.CreateAsync(entity);
 ```
 
@@ -191,6 +191,23 @@ Getting a list of documents as entities
 ```csharp
 var allEntities = this.readService.GetAll();
 var filteredEntities = this.readService.GetAll(x => x.Age == 30);
+````
+
+Updating an entity
+
+```csharp
+// Having a `person` Entity, we can:
+
+// Apply changes to the entity and then call `UpdateAsync`...
+this.writeService.UpdateAsync(person);
+
+// ... Or simply call `UpdateAsync` with the ID of the entity to be updated and the field-value pairs to be updated.
+var data = new Dictionary<string, object>
+{
+    ["Age"] = 30
+}
+this.writeService.UpdateAsync(personId, data);
+
 ````
 
 ## Note

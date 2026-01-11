@@ -1,6 +1,6 @@
 Feature: Read a Collection - Service
 
-Scenario Outline: Can GetAll
+  Scenario Outline: Can GetAll
     Given a ReadService of PersonEntity
     And a collection of 20 persons exist
     And 5 of the persons have the Name 'John'
@@ -9,11 +9,11 @@ Scenario Outline: Can GetAll
     And <expectedJohns> of the PersonEntities have the Name 'John'
 
     Examples:
-        | filter       | expectedTotal | expectedJohns |
-        | null         | 20            | 5             |
-        | name is John | 5             | 5             |
+      | filter       | expectedTotal | expectedJohns |
+      | null         | 20            | 5             |
+      | name is John | 5             | 5             |
 
-Scenario Outline: Can GetPaginatedAsync
+  Scenario Outline: Can GetPaginatedAsync
     Given a ReadService of PersonEntity
     And a collection of <number> persons exist
     And 10 of the persons have the Name 'John'
@@ -25,21 +25,21 @@ Scenario Outline: Can GetPaginatedAsync
     And the PaginationResult.Result.Count equals <pageItems>
 
     Examples:
-        | number | filter       | page | pageSize |  expectedTotal | pageItems |
-        | 10     | null         | 1    | 5        |  10            | 5         |
-        | 50     | null         | 2    | 8        |  50            | 8         |
-        | 100    | null         | 4    | 10       |  100           | 10        |
-        | 10     | name is John | 1    | 5        |  10            | 5         |
-        | 50     | name is John | 2    | 8        |  10            | 2         |
-        | 100    | name is John | 4    | 10       |  10            | 0         |
+      | number | filter       | page | pageSize | expectedTotal | pageItems |
+      | 10     | null         | 1    | 5        | 10            | 5         |
+      | 50     | null         | 2    | 8        | 50            | 8         |
+      | 100    | null         | 4    | 10       | 100           | 10        |
+      | 10     | name is John | 1    | 5        | 10            | 5         |
+      | 50     | name is John | 2    | 8        | 10            | 2         |
+      | 100    | name is John | 4    | 10       | 10            | 0         |
 
-Scenario: Can get the documents count using AsQueryable
+  Scenario: Can get the documents count using AsQueryable
     Given a ReadService of PersonEntity
     And a collection of 50 persons exist
     When calling the AsQueryable method of the ReadService
     Then Count property equals 50
 
-Scenario Outline: Can get the documents count using CountDocuments
+  Scenario Outline: Can get the documents count using CountDocuments
     Given a ReadService of PersonEntity
     And a collection of 50 persons exist
     And 10 of the persons have the Name 'John'
@@ -47,11 +47,11 @@ Scenario Outline: Can get the documents count using CountDocuments
     Then Count number equals <number>
 
     Examples:
-        | filter       | number | 
-        | null         | 50     |
-        | name is John | 10     |
+      | filter       | number |
+      | null         | 50     |
+      | name is John | 10     |
 
-Scenario Outline: Can GetById
+  Scenario Outline: Can GetById
     Given a ReadService of PersonEntity
     And a collection of 50 persons exist
     And 1 of the persons have the Name 'John' and Id xyz
@@ -60,11 +60,11 @@ Scenario Outline: Can GetById
     And the PersonEntity has the Name 'John'
 
     Examples:
-        | argType  | 
-        | ObjectId | 
-        | string   | 
+      | argType  |
+      | ObjectId |
+      | string   |
 
-Scenario Outline: Cannot GetById - Invalid Id or Name
+  Scenario Outline: Cannot GetById - Invalid Id or Name
     Given a ReadService of PersonEntity
     And a collection of 50 persons exist
     When calling the GetByIdAsync foo method of the ReadService

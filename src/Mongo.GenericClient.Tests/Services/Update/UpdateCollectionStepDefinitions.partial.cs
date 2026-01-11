@@ -5,17 +5,43 @@ namespace Mongo.GenericClient.Tests.Services.Update
 
     public partial class UpdateCollectionStepDefinitions : StepDefinitions<PersonEntity>
     {
-        private PersonEntity personToUpdate;
+        private readonly PersonEntity personToUpdate;
+        private readonly Dictionary<string, object> updateFields;
+        private string personIdAsString;
 
         public UpdateCollectionStepDefinitions()
             : base()
         {
             this.personToUpdate = DataFactory.BuildRandomPerson("John");
+            this.updateFields = [];
+            this.personIdAsString = string.Empty;
+
+            var a = new KeyValuePair<string, object>("Age", 30);
         }
 
-        private async Task CreatePersonCollectionAsync()
+        private async Task CreatePersonCollectionAsync(string name, int age)
         {
+            this.personToUpdate.Name = name;
+            this.personToUpdate.Age = age;
             await this.Collection.InsertOneAsync(this.personToUpdate);
+        }
+
+        private void SetPersonIdType(string personIdType)
+        {
+            switch (personIdType)
+            {
+                case "ObjectId":
+                    // No action needed, as the ID is already an ObjectId.
+                    break;
+
+                case "string":
+                    // Convert the ID to string for later use.
+                    this.personIdAsString = this.personToUpdate.Id.ToString();
+                    break;
+
+                default:
+                    throw new ArgumentException($"Unknown person ID type {personIdType}");
+            }
         }
 
         private void ModifyPersonEntity(string field, string value)
@@ -35,12 +61,26 @@ namespace Mongo.GenericClient.Tests.Services.Update
             }
         }
 
-        private async Task RunMethodAsync(string method)
+        private void UseFieldValuePair(string field, string value)
+        {
+            this.updateFields[field] = value;
+        }
+
+        private async Task RunMethodAsync(string method, bool isUsingFieldValuePairs)
         {
             switch (method)
             {
                 case "UpdateAsync":
-                    await this.WriteService.UpdateAsync(this.personToUpdate);
+                    if (isUsingFieldValuePairs)
+                    {
+                        _ = this.personIdAsString == string.Empty
+                            ? await this.WriteService.UpdateAsync(this.personToUpdate.Id, this.updateFields)
+                            : await this.WriteService.UpdateAsync(this.personIdAsString, this.updateFields);
+                    }
+                    else
+                    {
+                        await this.WriteService.UpdateAsync(this.personToUpdate);
+                    }
                     break;
 
                 default:
