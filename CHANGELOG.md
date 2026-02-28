@@ -1,5 +1,9 @@
 # Mongo.GenericClient
 
+## Release 10.1.1
+
+- Update nuget packages
+
 ## Release 10.1.0
 
 - Changes to UpdateAsync
