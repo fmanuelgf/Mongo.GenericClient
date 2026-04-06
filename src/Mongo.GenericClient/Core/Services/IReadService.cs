@@ -6,7 +6,6 @@ namespace Mongo.GenericClient.Core.Services
     using Mongo.GenericClient.Core.Entities;
     using Mongo.GenericClient.Models;
     using MongoDB.Bson;
-    using MongoDB.Driver.Linq;
 
     public interface IReadService<TEntity>
         where TEntity : IEntity
