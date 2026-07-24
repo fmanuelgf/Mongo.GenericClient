@@ -199,14 +199,14 @@ Updating an entity
 // Given a `person` entity, we can:
 
 // Apply changes to the entity and then call `UpdateAsync`...
-this.writeService.UpdateAsync(person);
+await this.writeService.UpdateAsync(person);
 
 // ... Or simply call `UpdateAsync` with the ID of the entity to be updated and the field-value pairs to be updated.
 var data = new Dictionary<string, object>
 {
     ["Age"] = 30
 }
-this.writeService.UpdateAsync(personId, data);
+await this.writeService.UpdateAsync(personId, data);
 
 ````
 
