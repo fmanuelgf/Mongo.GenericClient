@@ -1,5 +1,9 @@
 # Mongo.GenericClient
 
+## Release 10.1.4
+
+- Update nuget packages
+
 ## Release 10.1.3
 
 - Update nuget packages
