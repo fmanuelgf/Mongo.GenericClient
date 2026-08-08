@@ -1,6 +1,6 @@
 # Mongo.GenericClient
 
-Generic library to manage a [MongoDB](https://www.mongodb.com) database.
+Generic client for performing CRUD operations on [MongoDB](https://www.mongodb.com)
 
 ## Required environment variables
 
