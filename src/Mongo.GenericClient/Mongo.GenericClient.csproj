@@ -11,7 +11,7 @@
     <Authors>Francisco González</Authors>
     <Version>$(Package-Version)</Version>
     <Description>
-      Generic library to manage a MongoDB database.
+      Generic client for performing CRUD operations on MongoDB
     </Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
