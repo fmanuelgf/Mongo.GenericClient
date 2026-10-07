@@ -10,11 +10,11 @@ namespace Mongo.GenericClient
         /// <summary>
         /// The <see cref="MongoClient"/>, autoconnected to the configured database (see <see cref="AppConfig"/>)
         /// </summary>
-        public static MongoClient Client => new MongoClient(AppConfig.ConnectionString);
+        public static MongoClient Client { get; internal set; } = new MongoClient(AppConfig.ConnectionString);
         
         /// <summary>
         /// The <see cref="IMongoDatabase"/> (see <see cref="AppConfig"/>)
         /// </summary>
-        public static IMongoDatabase Database => Client.GetDatabase(AppConfig.DatabaseName);
+        public static IMongoDatabase Database { get; internal set; } = Client.GetDatabase(AppConfig.DatabaseName);
     }
 }

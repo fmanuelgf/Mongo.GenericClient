@@ -7,12 +7,10 @@ namespace Mongo.GenericClient
 
     public class MongoContext : IMongoContext
     {
-        private readonly IMongoDatabase database;
-
         public MongoContext(MongoClientSettings? settings = default)
         {
-            var client = new MongoClient(settings ?? AppConfig.DefaultMongoClientSettings);
-            this.database = client.GetDatabase(AppConfig.DatabaseName);
+            MongoHelper.Client = new MongoClient(settings ?? AppConfig.DefaultMongoClientSettings);
+            MongoHelper.Database = MongoHelper.Client.GetDatabase(AppConfig.DatabaseName);
         }
         
         /// <inheritdoc />
@@ -24,7 +22,7 @@ namespace Mongo.GenericClient
                     typeof(TEntity),
                     typeof(CollectionNameAttribute)) as CollectionNameAttribute;
 
-            return this.database.GetCollection<TEntity>(collectionName?.Name);
+            return MongoHelper.Database.GetCollection<TEntity>(collectionName?.Name);
         }
     }
 }
