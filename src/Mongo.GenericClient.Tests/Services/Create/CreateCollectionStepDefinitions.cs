@@ -15,7 +15,6 @@ namespace Mongo.GenericClient.Tests.Services.Create
         }
 
         [Given("(1) PersonEntity")]
-        [Given("a list of (.*) PersonEntities")]
         public void GivenAListOfPersonEntities(int number)
         {
             this.CreatePersonEntities(number);
