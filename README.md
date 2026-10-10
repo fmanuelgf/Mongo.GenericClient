@@ -120,9 +120,9 @@ namespace Mongo.GenericClient
 
     public static class MongoHelper
     {
-        public static MongoClient Client => new MongoClient(AppConfig.ConnectionString);
+        public static MongoClient Client { get; internal set; } = new MongoClient(AppConfig.ConnectionString);
         
-        public static IMongoDatabase Database => Client.GetDatabase(AppConfig.DatabaseName);
+        public static IMongoDatabase Database { get; internal set; } = Client.GetDatabase(AppConfig.DatabaseName);
     }
 }
 ```

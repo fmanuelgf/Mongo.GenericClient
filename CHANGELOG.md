@@ -1,5 +1,9 @@
 # Mongo.GenericClient
 
+## Release 10.2.0
+
+- `MongoHelper` and `MongoContext` now share the database and client instances.
+
 ## Release 10.1.5
 
 - Update nuget packages
